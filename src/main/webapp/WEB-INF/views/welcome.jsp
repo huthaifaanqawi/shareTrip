@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-    <h1>Share Trip</h1>
+    <h1>Welcome Share Trip</h1>
 </body>
 </html>
