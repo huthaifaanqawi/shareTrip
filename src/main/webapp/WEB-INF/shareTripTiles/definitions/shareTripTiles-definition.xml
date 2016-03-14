@@ -45,10 +45,16 @@
 	    <put-attribute name="body" value="/WEB-INF/views//logout.jsp" />
  	</definition>
 	<!-- end Logout Layout -->
+			<!-- SignUp Layout -->
+ 	<definition name="logout" extends="HomeLayout">
+		<put-attribute name="title" value="LogOut" />
+	    <put-attribute name="body" value="/WEB-INF/views//logout.jsp" />
+ 	</definition>
+	<!-- end SignUp Layout -->
 	<!-- Access Forbidden Layout -->
- 	<definition name="accessForbidden" extends="HomeLayout">
-		<put-attribute name="title" value="Access Forbidden" />
-	    <put-attribute name="body" value="/WEB-INF/views/accessForbidden.jsp" />
+ 	<definition name="signUp" extends="HomeLayout">
+		<put-attribute name="title" value="Register" />
+	    <put-attribute name="body" value="/WEB-INF/views/signUp.jsp" />
  	</definition>
 	<!-- end Forbidden Layout -->
 	
