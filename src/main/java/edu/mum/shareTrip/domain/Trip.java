@@ -10,6 +10,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity(name="TRIP")
 public class Trip {
@@ -19,23 +23,39 @@ public class Trip {
 	@Column(name="ID")
 	private int id;
 	
+	@NotEmpty
+	@Column(name="TITLE")
+	private String title;
+	
+	@NotEmpty
+	@Column(name="DESCRIPTION")
+	private String description;
+	
+	@NotNull
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@Column(name="DEPART_TIME")
 	private Date departTime;
 	
+	@NotNull
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@Column(name="RETURN_TIME")
 	private Date returnTime;
 	
+	@NotEmpty
 	@Column(name="TYPE")
 	private String type;
 	
+	@NotNull
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="ORIGIN_ID",referencedColumnName="ID")
 	private Place origin;
 	
+	@NotNull
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="DESTIONATION_ID",referencedColumnName="ID")
 	private Place destination;
 	
+	@NotNull
 	@OneToOne
 	@JoinColumn(name="CAR_ID",referencedColumnName="ID")
 	private Car car;
@@ -94,6 +114,22 @@ public class Trip {
 
 	public void setCar(Car car) {
 		this.car = car;
+	}
+	
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	
 }
