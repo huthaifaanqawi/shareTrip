@@ -71,7 +71,8 @@
 	</definition>
 	<!-- end Trip List -->
 	<!-- Add Trip-->
-	<definition name="addTrip" extends="userDashBoard"> 
+	<definition name="addTrip" extends="userDashBoard">
+	<put-attribute name="heading" value="welcome our ShareTrip Member" /> 
 	<put-attribute name="title" value="Add Trip" />
 	<put-attribute name="body" value="/WEB-INF/views/userDashBoard/TripOperations/addTrip.jsp"></put-attribute>
 	</definition>

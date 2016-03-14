@@ -1,6 +1,5 @@
 package edu.mum.shareTrip.controllers;
 
-import java.util.List;
 
 import javax.validation.Valid;
 
@@ -16,27 +15,26 @@ import edu.mum.shareTrip.domain.Vechile;
 import edu.mum.shareTrip.service.VechileService;
 
 @Controller
-@RequestMapping("/userDashBoard")
 public class VechileController {
      @Autowired
      VechileService vechileService;
-	@RequestMapping(value={"/borrowVechiles"},method=RequestMethod.GET)
+	@RequestMapping(value={"borrowList"},method=RequestMethod.GET)
 	public String borrowVechile(Model model)
 	{
-		List<Vechile> vechiles=vechileService.getAll();
-		model.addAttribute("vechiles", vechiles);
-		return "borrowVechiles";
+	//	List<Vechile> vechiles=vechileService.getAll();
+		//model.addAttribute("vechiles", vechiles);
+		return "borrowList";
 	}
-	@RequestMapping(value={"/addVechile"},method=RequestMethod.GET)
+	@RequestMapping(value={"addVehicle"},method=RequestMethod.GET)
 	public String addVechile(@ModelAttribute Vechile vechile,  Model model)
 	{
-		return "addVechile";
+		return "addVehicle";
 	}
-	@RequestMapping(value={"/addVechile"},method=RequestMethod.POST)
+	@RequestMapping(value={"/addVehicle"},method=RequestMethod.POST)
 	public String saveVechile(@Valid@ModelAttribute Vechile vechile,  Model model,BindingResult result)
 	{
 		if(result.hasErrors())
-			return "addVechile";
+			return "addVehicle";
 		return "redirect:/userBorrowList";
 	}
 	@RequestMapping(value={"/userBorrowList"},method=RequestMethod.GET)
