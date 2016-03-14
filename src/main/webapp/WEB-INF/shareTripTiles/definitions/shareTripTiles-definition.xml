@@ -2,35 +2,101 @@
 <!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" 
 	"http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <!-- Home Layout -->
-<!-- Site Layout definitions -->
+<!-- Site Layout definitions  template-->
 <tiles-definitions>
 	<definition name="HomeLayout" template="/WEB-INF/shareTripTiles/templates/baseLayoutViews/HomeLayout.jsp">
 		<put-attribute name="title" value="" />
 		<put-attribute name="heading" value=""  />
 		<put-attribute name="tagline" value="" />
- 		<put-attribute name="navigation" value="" />
+ 		<put-attribute name="navigation" value="/WEB-INF/shareTripTiles/templates/baseLayoutViews/navigation.jsp" />
 		<put-attribute name="body" value="" />
-		<put-attribute name="footer" value="" />
+		<put-attribute name="footer" value="/WEB-INF/shareTripTiles/templates/baseLayoutViews/footer.jsp" />
 	</definition>
 <!-- end Site Layout  definition-->
 <!--First Welcome Page Layout  -->
  	<definition name="welcome" extends="HomeLayout">
 		<put-attribute name="title" value="Welcome" />
 		<put-attribute name="heading" value="Share Trip Website" />
-		<put-attribute name="navigation" value="/WEB-INF/views/welcomeViews/navigation.jsp" />
- 		<put-attribute name="body" value="/WEB-INF/views/welcomeViews/welcome.jsp" />
- 		<put-attribute name="footer" value="/WEB-INF/views/welcomeViews/footer.jsp" />
+ 		<put-attribute name="body" value="/WEB-INF/views/welcome.jsp" />
 	</definition>
 	<!-- end First Welcome Page -->
+	<!--First About Page Layout  -->
+ 	<definition name="about" extends="HomeLayout">
+		<put-attribute name="title" value="About Share Trip" />
+ 		<put-attribute name="body" value="/WEB-INF/views/about.jsp" />
+	</definition>
+	<!-- end About Page -->
+	<!--First Contact Us Page Layout  -->
+ 	<definition name="contactUs" extends="HomeLayout">
+		<put-attribute name="title" value="Contact Share Trip" />
+ 		<put-attribute name="body" value="/WEB-INF/views/contactUs.jsp" />
+	</definition>
+	<!-- end Contact Us Page -->
+	
 	<!-- Login Layout -->
-	<!--First Welcome Page Layout  -->
  	<definition name="login" extends="HomeLayout">
-		<put-attribute name="title" value="Welcome" />
-		<put-attribute name="heading" value="Share Trip Website" />
-		<put-attribute name="navigation" value="/WEB-INF/views/loginViews/navigation.jsp" />
- 		<put-attribute name="body" value="/WEB-INF/views/loginViews/login.jsp" />
- 		<put-attribute name="footer" value="/WEB-INF/views/loginViews/footer.jsp" />
-	</definition>
-	<!-- end First Welcome Page -->
+		<put-attribute name="title" value="Login" />
+	    <put-attribute name="body" value="/WEB-INF/views/login.jsp" />
+ 	</definition>
 	<!-- end Login Layout -->
+		<!-- Logout Layout -->
+ 	<definition name="logout" extends="HomeLayout">
+		<put-attribute name="title" value="LogOut" />
+	    <put-attribute name="body" value="/WEB-INF/views//logout.jsp" />
+ 	</definition>
+	<!-- end Logout Layout -->
+	<!-- Access Forbidden Layout -->
+ 	<definition name="accessForbidden" extends="HomeLayout">
+		<put-attribute name="title" value="Access Forbidden" />
+	    <put-attribute name="body" value="/WEB-INF/views/accessForbidden.jsp" />
+ 	</definition>
+	<!-- end Forbidden Layout -->
+	
+	
+	
+		<!-- user DashBoard Layout  template-->
+ 	<definition name="userDashBoard"  template="/WEB-INF/shareTripTiles/templates/baseLayoutViews/HomeLayout.jsp">
+		<put-attribute name="title" value="User DashBoard" />
+		<put-attribute name="heading" value="welcome our ShareTrip Member" />
+		<put-attribute name="navigation" value="/WEB-INF/views/userDashBoard/navigation.jsp" />
+ 		<put-attribute name="body" value="/WEB-INF/views/userDashBoard/welcome.jsp" />
+ 		<put-attribute name="footer" value="/WEB-INF/views/userDashBoard/footer.jsp" />
+	</definition>
+	<!-- end DashBoard Layout -->
+	<!-- Trip List -->
+	<definition name="tripList" extends="userDashBoard"> 
+	<put-attribute name="title" value="Trip List" />
+	<put-attribute name="body" value="/WEB-INF/views/userDashBoard/TripOperations/tripList.jsp"></put-attribute>
+	</definition>
+	<!-- end Trip List -->
+	<!-- Add Trip-->
+	<definition name="addTrip" extends="userDashBoard"> 
+	<put-attribute name="title" value="Add Trip" />
+	<put-attribute name="body" value="/WEB-INF/views/userDashBoard/TripOperations/addTrip.jsp"></put-attribute>
+	</definition>
+	<!-- end Trip List -->
+	<!-- Borrow List -->
+	<definition name="borrowList" extends="userDashBoard"> 
+	<put-attribute name="title" value="Borrow List" />
+	<put-attribute name="body" value="/WEB-INF/views/userDashBoard/VechilesOperations/borrowList.jsp"></put-attribute>
+	</definition>
+	<!-- end Borrow List -->
+	<!-- Add Vehicle -->
+	<definition name="addVehicle" extends="userDashBoard"> 
+	<put-attribute name="title" value="Add Vehicle" />
+	<put-attribute name="body" value="/WEB-INF/views/userDashBoard/VechilesOperations/addVehicle.jsp"></put-attribute>
+	</definition>
+	<!-- end Add Vehicle -->
+		<!-- User Borrow List -->
+	<definition name="userBorrowList" extends="userDashBoard"> 
+	<put-attribute name="title" value="My Borrow List" />
+	<put-attribute name="body" value="/WEB-INF/views/userDashBoard/UserOperations/userBorrowList.jsp"></put-attribute>
+	</definition>
+	<!-- end User Borrow List -->
+		<!-- User Trip List -->
+	<definition name="usertripList" extends="userDashBoard"> 
+	<put-attribute name="title" value="My Trip List" />
+	<put-attribute name="body" value="/WEB-INF/views/userDashBoard/UserOperations/usertripList.jsp"></put-attribute>
+	</definition>
+	<!-- end User Trip List -->
 </tiles-definitions>

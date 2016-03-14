@@ -8,6 +8,6 @@
 </head>
 <body>
 
-    <h1>Trip List</h1>
+    <h1>Welcome our User Share Trip</h1>
 </body>
 </html>

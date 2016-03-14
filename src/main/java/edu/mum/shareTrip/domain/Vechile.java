@@ -1,13 +1,14 @@
 package edu.mum.shareTrip.domain;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.Transient;
-
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -19,23 +20,35 @@ public class Vechile {
     @Column(name="ID")
 	private int id;
     
-	@NotEmpty
+	@NotEmpty(message="{edu.mum.shareTrip.domain.Vechile.vechileName.empty}")
+	@Size(min=3, max=20, message="{edu.mum.shareTrip.domain.Vechile.vechileName.charcter}")
 	@Column(name="VECHILE_NAME")
 	private String vechileName;
 	
-	@NotEmpty(message="edu.mum.domain.vechile.type")
+	@NotEmpty(message="{edu.mum.shareTrip.domain.Vechile.type.empty}")
 	@Column(name="TYPE")
 	private String type;
 	
 	@Column(name="SEAT_TYPE")
+	@NotNull(message="{edu.mum.shareTrip.domain.Vechile.seatNumber.null}")
+	@Min(value=1, message="{edu.mum.shareTrip.domain.Vechile.seatNumber.min}")
+	@Max(value=40, message="{edu.mum.shareTrip.domain.Vechile.seatNumber.max}")
 	private int seatNumber;
 	
 	@Column(name="PRICE_PER_FAY")
+	@NotNull(message="{edu.mum.shareTrip.domain.Vechile.pricePerDay.null}")
+	@Min(value=5, message="{edu.mum.shareTrip.domain.Vechile.pricePerDay.min}")
 	private double pricePerDay;
-	
+	@NotEmpty(message="{edu.mum.shareTrip.domain.Vechile.vechileImage.empty}")
 	@Transient
-	private MultipartFile productImage;
+	private MultipartFile vechileImage;
 	
+	public MultipartFile getVechileImage() {
+		return vechileImage;
+	}
+	public void setVechileImage(MultipartFile vechileImage) {
+		this.vechileImage = vechileImage;
+	}
 	public int getId() {
 		return id;
 	}
@@ -68,11 +81,5 @@ public class Vechile {
 	}
 	
 	
-	public MultipartFile getProductImage() {
-		return productImage;
-	}
 
-	public void setProductImage(MultipartFile productImage) {
-		this.productImage = productImage;
-	}
 }

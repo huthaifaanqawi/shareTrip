@@ -10,4 +10,24 @@ public class HomeController {
 	public String welcome(){
 		return "welcome";
 	}
+	@RequestMapping(value={"about"})
+	public String about(){
+		return "about";
+	}
+	@RequestMapping(value={"contactUs"})
+	public String contactUs(){
+		return "contactUs";
+	}
+	@RequestMapping(value={"login"})
+	public String login(){
+		return "login";
+	}
+	@RequestMapping(value={"logout"})
+	public String logout(){
+		return "logout";
+	}
+	@RequestMapping(value={"userDashBoard"})
+	public String userDashBoard(){
+		return "userDashBoard/welcome";
+	}
 }
