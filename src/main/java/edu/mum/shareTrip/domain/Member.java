@@ -38,15 +38,15 @@ public class Member {
 	private Credentials credentials;
 	
 	@OneToMany(fetch=FetchType.LAZY,cascade=CascadeType.REMOVE)
-	@JoinColumn
+	@JoinColumn(name="MEMBER_ID",referencedColumnName="ID")
 	private List<Book> bookList;
 	
 	@OneToMany(cascade=CascadeType.REMOVE,fetch=FetchType.LAZY)
-	@JoinColumn
+	@JoinColumn(name="MEMBER_ID",referencedColumnName="ID")
 	private List<Rental> rentals;
 	
 	@OneToMany(cascade={CascadeType.REMOVE},fetch=FetchType.LAZY)
-	@JoinColumn
+	@JoinColumn(name="MEMBER_ID",referencedColumnName="ID")
 	private List<Trip> trips;
 	
 	@OneToOne(cascade=CascadeType.ALL)
