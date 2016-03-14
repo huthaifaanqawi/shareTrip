@@ -18,6 +18,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Entity(name="TRIP")
 public class Trip {
 
+	//
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="ID")

@@ -27,6 +27,7 @@ public class TripController {
 		}
 		
 		redirectAttributes.addFlashAttribute("trip", trip);
+		//Save
 		
 		return "redirect:/showTripDetails";
 	}

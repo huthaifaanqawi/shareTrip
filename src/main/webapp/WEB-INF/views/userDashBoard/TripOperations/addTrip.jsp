@@ -45,7 +45,7 @@
 		    <form:select id="carlist" path="car" 
                 	items="${carList}" itemLabel="plaque" itemValue="id"/>
 		</p>
-		
+		<!--  -->
 		<input id="reset" type="reset" value="Reset">
 		<input id="submit" type="submit" value="Add Trip">
 	</fieldset>
