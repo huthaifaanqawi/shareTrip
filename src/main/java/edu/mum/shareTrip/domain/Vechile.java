@@ -1,23 +1,40 @@
 package edu.mum.shareTrip.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.xml.bind.annotation.XmlTransient;
+import javax.persistence.JoinColumn;
+import javax.persistence.Transient;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.web.multipart.MultipartFile;
- @Entity
+
+@Entity(name="VECHILE")
 public class Vechile {
 
-   @Id
-	int id;
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    @Column(name="ID")
+	private int id;
+    
 	@NotEmpty
-	String vechileName;
+	@Column(name="VECHILE_NAME")
+	private String vechileName;
+	
 	@NotEmpty(message="edu.mum.domain.vechile.type")
-	String type;
-	int seatNumber;
-	double pricePerDay;
-	private MultipartFile  productImage;
+	@Column(name="TYPE")
+	private String type;
+	
+	@Column(name="SEAT_TYPE")
+	private int seatNumber;
+	
+	@Column(name="PRICE_PER_FAY")
+	private double pricePerDay;
+	
+	@Transient
+	private MultipartFile productImage;
 	
 	public int getId() {
 		return id;
@@ -50,10 +67,11 @@ public class Vechile {
 		this.pricePerDay = pricePerDay;
 	}
 	
+	
 	public MultipartFile getProductImage() {
 		return productImage;
 	}
-	@XmlTransient
+
 	public void setProductImage(MultipartFile productImage) {
 		this.productImage = productImage;
 	}

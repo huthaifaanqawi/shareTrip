@@ -1,5 +1,5 @@
 package edu.mum.shareTrip.domain;
 
-public class User {
+public class Role {
 
 }
