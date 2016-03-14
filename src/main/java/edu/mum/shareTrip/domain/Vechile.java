@@ -1,6 +1,7 @@
 package edu.mum.shareTrip.domain;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.xml.bind.annotation.XmlTransient;
 
 import org.hibernate.validator.constraints.NotEmpty;
@@ -8,7 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
  @Entity
 public class Vechile {
 
-   @javax.persistence.Id
+   @Id
 	int id;
 	@NotEmpty
 	String vechileName;
