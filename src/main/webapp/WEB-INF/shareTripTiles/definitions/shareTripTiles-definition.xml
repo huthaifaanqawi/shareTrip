@@ -55,9 +55,8 @@
 	
 	
 		<!-- user DashBoard Layout  template-->
- 	<definition name="userDashBoard"   extends="HomeLayout">
+ 	<definition name="userDashBoard"  template="/WEB-INF/shareTripTiles/templates/baseLayoutViews/HomeLayout.jsp">
 		<put-attribute name="title" value="User DashBoard" />
-		<put-attribute name="tagline" value="" />
 		<put-attribute name="heading" value="welcome our ShareTrip Member" />
 		<put-attribute name="navigation" value="/WEB-INF/views/userDashBoard/navigation.jsp" />
  		<put-attribute name="body" value="/WEB-INF/views/userDashBoard/welcome.jsp" />

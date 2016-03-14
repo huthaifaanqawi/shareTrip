@@ -28,6 +28,6 @@ public class HomeController {
 	}
 	@RequestMapping(value={"userDashBoard"})
 	public String userDashBoard(){
-		return "userDashBoard";
+		return "userDashBoard/welcome";
 	}
 }
