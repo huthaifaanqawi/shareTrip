@@ -1,13 +1,17 @@
 package edu.mum.shareTrip.domain;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.Transient;
 
 @Entity(name="MEMBER")
 public class Member {
@@ -29,9 +33,25 @@ public class Member {
 	@Column(name="PHONE")
 	private String phone;
 	
-	@OneToOne
-	@JoinColumn(name="USERNAME")
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="USERNAME",referencedColumnName="USERNAME")
 	private Credentials credentials;
+	
+	@OneToMany(fetch=FetchType.LAZY,cascade=CascadeType.REMOVE)
+	@JoinColumn
+	private List<Book> bookList;
+	
+	@OneToMany(cascade=CascadeType.REMOVE,fetch=FetchType.LAZY)
+	@JoinColumn
+	private List<Rental> rentals;
+	
+	@OneToMany(cascade={CascadeType.REMOVE},fetch=FetchType.LAZY)
+	@JoinColumn
+	private List<Trip> trips;
+	
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="ADDRESS_ID",referencedColumnName="ID")
+	private Address address;
 
 	public Credentials getCredentials() {
 		return credentials;
@@ -39,5 +59,77 @@ public class Member {
 
 	public void setCredentials(Credentials credentials) {
 		this.credentials = credentials;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public List<Book> getBookList() {
+		return bookList;
+	}
+
+	public void setBookList(List<Book> bookList) {
+		this.bookList = bookList;
+	}
+
+	public List<Rental> getRentals() {
+		return rentals;
+	}
+
+	public void setRentals(List<Rental> rentals) {
+		this.rentals = rentals;
+	}
+
+	public List<Trip> getTrips() {
+		return trips;
+	}
+
+	public void setTrips(List<Trip> trips) {
+		this.trips = trips;
+	}
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
 	}
 }
