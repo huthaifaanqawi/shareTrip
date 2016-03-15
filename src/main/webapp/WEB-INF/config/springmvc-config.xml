@@ -12,7 +12,7 @@
 	<context:component-scan base-package="edu.mum.shareTrip" />
 	<mvc:annotation-driven />
 	<mvc:annotation-driven  validator="validator"/>
-	<mvc:resources mapping="/css/**" location="/resources/css/" />
+	
 	<!-- start tiles -->
 	<!-- enable tiles -->
 	<bean id="shareTripViewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
@@ -27,6 +27,7 @@
 			</list>
 		</property>
 	</bean>
+	<mvc:resources mapping="/css/**" location="/WEB-INF/resources/css/" />
 		<!-- end tiles -->
 		<!-- Message Spring MVC Resource -->
 		<bean id= "messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
