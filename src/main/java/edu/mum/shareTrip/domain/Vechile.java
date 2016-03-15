@@ -1,4 +1,6 @@
 package edu.mum.shareTrip.domain;
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,6 +14,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
 @Entity(name="VECHILE")
@@ -27,6 +30,7 @@ public class Vechile {
 	@Column(name="VECHILE_NAME")
 	private String vechileName;
 	
+	
 	@NotEmpty(message="{edu.mum.shareTrip.domain.Vechile.type.empty}")
 	@Column(name="TYPE")
 	private String type;
@@ -41,15 +45,58 @@ public class Vechile {
 	@NotNull(message="{edu.mum.shareTrip.domain.Vechile.pricePerDay.null}")
 	@Min(value=5, message="{edu.mum.shareTrip.domain.Vechile.pricePerDay.min}")
 	private double pricePerDay;
+	
 	@NotEmpty(message="{edu.mum.shareTrip.domain.Vechile.vechileImage.empty}")
 	@Transient
 	private MultipartFile vechileImage;
 	
+	@Size(min=3, max=20, message="{edu.mum.shareTrip.domain.Vechile.plateNumber}")
+	@Column(name="PLATE_NUMER")
+	private String plateNumber;
+	
+	@Size(min=5, message="{edu.mum.shareTrip.domain.Vechile.description}")
+	@Column(name="DESCRIPTION")
+	private String description;
+	
+	@DateTimeFormat(style = "S-")
+	private Date addDate;
+  private String status;
+	    
+	    
+		public String getStatus() {
+			return status;
+		}
+
+		public void setStatus(String status) {
+			this.status = status;
+		}
 	@ManyToOne
 	@JoinColumn(name="MEMBER_ID",referencedColumnName="ID")
 	private Member member;
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public Date getAddDate() {
+		return addDate;
+	}
+
+	public void setAddDate(Date addDate) {
+		this.addDate = addDate;
+	}
+
 	public MultipartFile getVechileImage() {
 		return vechileImage;
+	}
+	public String getPlateNumber() {
+		return plateNumber;
+	}
+	public void setPlateNumber(String plateNumber) {
+		this.plateNumber = plateNumber;
 	}
 	public void setVechileImage(MultipartFile vechileImage) {
 		this.vechileImage = vechileImage;

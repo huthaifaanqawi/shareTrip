@@ -33,6 +33,9 @@ public class VechileController {
 	@RequestMapping(value={"/addVehicle"},method=RequestMethod.POST)
 	public String saveVechile(@Valid@ModelAttribute Vechile vechile,  Model model,BindingResult result)
 	{
+		// get the user session Attribute
+		// veche.set(user);
+		//vechileService.save(veichle);
 		if(result.hasErrors())
 			return "addVehicle";
 		return "redirect:/userBorrowList";
