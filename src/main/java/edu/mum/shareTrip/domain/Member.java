@@ -33,6 +33,12 @@ public class Member {
 	@Column(name="PHONE")
 	private String phone;
 	
+    @Column(name="EMAIL")
+	private String email;
+    
+    @Column(name="GENDER")
+    private String gender;
+	
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="USERNAME",referencedColumnName="USERNAME")
 	private Credentials credentials;
@@ -132,4 +138,21 @@ public class Member {
 	public void setAddress(Address address) {
 		this.address = address;
 	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+	
 }
