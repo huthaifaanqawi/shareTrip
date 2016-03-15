@@ -13,9 +13,13 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlTransient;
+
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity(name="VECHILE")
 public class Vechile {
@@ -46,7 +50,8 @@ public class Vechile {
 	@Min(value=5)
 	private double pricePerDay;
 	
-	@Transient
+	
+	@JsonIgnore 
 	private MultipartFile vechileImage;
 	
 	@Size(min=3, max=20)
@@ -90,7 +95,7 @@ public class Vechile {
 	public void setAddDate(Date addDate) {
 		this.addDate = addDate;
 	}
-
+	@XmlTransient  
 	public MultipartFile getVechileImage() {
 		return vechileImage;
 	}

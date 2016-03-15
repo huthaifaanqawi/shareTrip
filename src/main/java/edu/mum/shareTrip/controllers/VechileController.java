@@ -1,6 +1,7 @@
 package edu.mum.shareTrip.controllers;
 
 
+import java.io.File;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +14,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 
 import edu.mum.shareTrip.domain.Member;
 import edu.mum.shareTrip.domain.Vechile;
@@ -35,13 +37,26 @@ public class VechileController {
 		return "addVehicle";
 	}
 	@RequestMapping(value={"addVehicle"},method=RequestMethod.POST)
-	public String saveVechile(@Valid@ModelAttribute("vechile") Vechile vechile,  BindingResult result,HttpServletRequest request)
+	public String saveVechile(@Valid@ModelAttribute("vechile") Vechile newvechile,  BindingResult result,HttpServletRequest request)
 	{
 		if(result.hasErrors())
 			{
 			return "addVehicle";
 			}
-	vechileService.save(vechile);
+		MultipartFile vechileImage = newvechile.getVechileImage();
+		String rootDirectory = request.getSession().getServletContext().getRealPath("/");
+		System.out.println(rootDirectory);
+		newvechile.setId(vechileService.save(newvechile).getId());
+		
+		//isEmpty means file exists BUT NO Content
+			if (vechileImage!=null && !vechileImage.isEmpty()) {
+		       try {
+		    	   vechileImage.transferTo(new File(rootDirectory+"\\resources\\images\\"+newvechile.getId() + ".png"));
+		       } catch (Exception e) {
+				throw new RuntimeException("Vechile Image saving failed", e);
+		   }
+		   }
+  	vechileService.save(newvechile);
 		if(result.hasErrors())
 			return "addVehicle";
 		return "redirect:/userBorrowList";
