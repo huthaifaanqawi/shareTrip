@@ -74,7 +74,7 @@ public class TripController {
 		
 //		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 //	    String name = auth.getName(); //get logged in username
-//	    
+//	    //
 //	    Member member = userservice.getMemberByUserName(name);
 		
 	    trip.setMember(member);
