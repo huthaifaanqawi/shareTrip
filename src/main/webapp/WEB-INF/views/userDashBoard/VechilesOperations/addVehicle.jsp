@@ -13,7 +13,7 @@
 
     <h1>Add Vehicle Hello</h1>
  
-      <form:form commandName="vechile" action ="addVehicle" method="post">
+      <form:form commandName="vechile" method="post" enctype="multipart/form-data">
 		
                     <div>
 					<label for="vechileName"><spring:message code="addVehicle.form.vechileName"/></label>

@@ -23,45 +23,44 @@ public class Vechile {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     @Column(name="ID")
-	private int id;
+	private long id;
     
-	@NotEmpty(message="{edu.mum.shareTrip.domain.Vechile.vechileName.empty}")
-	@Size(min=3, max=20, message="{edu.mum.shareTrip.domain.Vechile.vechileName.charcter}")
+	@NotEmpty(message="edu.mum.shareTrip.domain.Vechile.vechileName.empty")
+	@Size(min=3, max=20, message="edu.mum.shareTrip.domain.Vechile.vechileName.charcter")
 	@Column(name="VECHILE_NAME")
 	private String vechileName;
 	
 	
-	@NotEmpty(message="{edu.mum.shareTrip.domain.Vechile.type.empty}")
+	@NotEmpty(message="edu.mum.shareTrip.domain.Vechile.type.empty")
 	@Column(name="TYPE")
 	private String type;
 	
 	@Column(name="SEAT_NUMBER")
-	@NotNull(message="{edu.mum.shareTrip.domain.Vechile.seatNumber.null}")
-	@Min(value=1, message="{edu.mum.shareTrip.domain.Vechile.seatNumber.min}")
-	@Max(value=40, message="{edu.mum.shareTrip.domain.Vechile.seatNumber.max}")
+	@NotNull(message="edu.mum.shareTrip.domain.Vechile.seatNumber.null")
+	@Min(value=1, message="edu.mum.shareTrip.domain.Vechile.seatNumber.min")
+	@Max(value=40, message="edu.mum.shareTrip.domain.Vechile.seatNumber.max")
 	private int seatNumber;
 	
 	@Column(name="PRICE_PER_DAY")
-	@NotNull(message="{edu.mum.shareTrip.domain.Vechile.pricePerDay.null}")
-	@Min(value=5, message="{edu.mum.shareTrip.domain.Vechile.pricePerDay.min}")
+	@NotNull(message="edu.mum.shareTrip.domain.Vechile.pricePerDay.null")
+	@Min(value=5, message="edu.mum.shareTrip.domain.Vechile.pricePerDay.min")
 	private double pricePerDay;
 	
-	@NotEmpty(message="{edu.mum.shareTrip.domain.Vechile.vechileImage.empty}")
 	@Transient
 	private MultipartFile vechileImage;
 	
-	@Size(min=3, max=20, message="{edu.mum.shareTrip.domain.Vechile.plateNumber}")
+	@Size(min=3, max=20, message="edu.mum.shareTrip.domain.Vechile.plateNumber")
 	@Column(name="PLATE_NUMER")
 	private String plateNumber;
 	
-	@Size(min=5, message="{edu.mum.shareTrip.domain.Vechile.description}")
+	@Size(min=5, message="edu.mum.shareTrip.domain.Vechile.description")
 	@Column(name="DESCRIPTION")
 	private String description;
 
 	@Column(name="DATE_REGISTER")
 	private Date addDate;
 	
-    @NotEmpty(message="{edu.mum.shareTrip.domain.Vechile.status}") 
+    @NotEmpty(message="edu.mum.shareTrip.domain.Vechile.status") 
     @Column(name="STATUS")
   private String status;
 	    
@@ -104,10 +103,10 @@ public class Vechile {
 	public void setVechileImage(MultipartFile vechileImage) {
 		this.vechileImage = vechileImage;
 	}
-	public int getId() {
+	public long getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 	public String getVechileName() {

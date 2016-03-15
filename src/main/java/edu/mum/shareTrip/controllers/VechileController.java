@@ -1,6 +1,8 @@
 package edu.mum.shareTrip.controllers;
 
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import edu.mum.shareTrip.domain.Member;
 import edu.mum.shareTrip.domain.Vechile;
 import edu.mum.shareTrip.service.VechileService;
 
@@ -21,8 +24,8 @@ public class VechileController {
 	@RequestMapping(value={"borrowList"},method=RequestMethod.GET)
 	public String borrowVechile(Model model)
 	{
-	//	List<Vechile> vechiles=vechileService.getAll();
-		//model.addAttribute("vechiles", vechiles);
+		List<Vechile> vechiles=vechileService.getAll();
+		model.addAttribute("vechiles", vechiles);
 		return "borrowList";
 	}
 	@RequestMapping(value={"addVehicle"},method=RequestMethod.GET)
@@ -30,12 +33,13 @@ public class VechileController {
 	{
 		return "addVehicle";
 	}
-	@RequestMapping(value={"/addVehicle"},method=RequestMethod.POST)
-	public String saveVechile(@Valid@ModelAttribute Vechile vechile,  Model model,BindingResult result)
+	@RequestMapping(value={"addVehicle"},method=RequestMethod.POST)
+	public String saveVechile(@Valid@ModelAttribute("vechile") Vechile vechile,  BindingResult result,Model model)
 	{
-		// get the user session Attribute
-		// veche.set(user);
-		//vechileService.save(veichle);
+		Member member= new Member();
+		member.setFirstName("Ahmad");
+		vechile.setMember(member);
+	//	vechileService.save(vechile);
 		if(result.hasErrors())
 			return "addVehicle";
 		return "redirect:/userBorrowList";
