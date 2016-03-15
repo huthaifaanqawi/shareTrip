@@ -22,10 +22,12 @@ import edu.mum.shareTrip.domain.Car;
 import edu.mum.shareTrip.domain.Member;
 import edu.mum.shareTrip.domain.Place;
 import edu.mum.shareTrip.domain.Trip;
+import edu.mum.shareTrip.domain.Vechile;
 import edu.mum.shareTrip.service.CarService;
 import edu.mum.shareTrip.service.PlaceService;
 import edu.mum.shareTrip.service.TripService;
 import edu.mum.shareTrip.service.UserService;
+import edu.mum.shareTrip.service.VechileService;
 
 @Controller
 public class TripController {
@@ -34,7 +36,7 @@ public class TripController {
 	PlaceService placesService;
 	
 	@Autowired
-	CarService carService;
+	VechileService vehicleService;
 	
 	@Autowired
 	TripService tripservice;
@@ -45,7 +47,7 @@ public class TripController {
 	@ModelAttribute
 	public void loadList(Model model){
 		model.addAttribute("placeslist", placesService.getAllPlaces());
-		model.addAttribute("carlist", carService.getAllCar());
+		model.addAttribute("carlist", vehicleService.getAll());
 	}
 	
 	@RequestMapping(value={"addTrip"}, method=RequestMethod.GET)
@@ -63,7 +65,7 @@ public class TripController {
 		
 		Place origin = placesService.getPlaceById(originId);
 		Place destination = placesService.getPlaceById(destinationId);
-		Car car = carService.getCarById(carId);
+		Vechile car = vehicleService.getVehicleById(carId);
 		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 	    String name = auth.getName(); //get logged in username
@@ -73,7 +75,7 @@ public class TripController {
 	    trip.setMember(member);
 		trip.setOrigin(origin);
 		trip.setDestination(destination);
-		trip.setCar(car);
+		trip.setVehicle(car);
 		
 		if(result.hasErrors()){
 			return "addTrip";
