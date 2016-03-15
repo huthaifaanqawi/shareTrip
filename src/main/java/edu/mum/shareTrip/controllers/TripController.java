@@ -1,18 +1,52 @@
 package edu.mum.shareTrip.controllers;
 
+import java.util.List;
+
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import edu.mum.shareTrip.domain.Car;
+import edu.mum.shareTrip.domain.Member;
+import edu.mum.shareTrip.domain.Place;
 import edu.mum.shareTrip.domain.Trip;
+import edu.mum.shareTrip.service.CarService;
+import edu.mum.shareTrip.service.PlaceService;
+import edu.mum.shareTrip.service.TripService;
+import edu.mum.shareTrip.service.UserService;
 
 @Controller
 public class TripController {
+	
+	@Autowired
+	PlaceService placesService;
+	
+	@Autowired
+	CarService carService;
+	
+	@Autowired
+	TripService tripservice;
+	
+	@Autowired
+	UserService userservice;
+	
+	@ModelAttribute
+	public void loadList(Model model){
+		model.addAttribute("placeslist", placesService.getAllPlaces());
+		model.addAttribute("carlist", carService.getAllCar());
+	}
 	
 	@RequestMapping(value={"addTrip"}, method=RequestMethod.GET)
 	public String addTrip(@ModelAttribute("trip") Trip trip){
@@ -20,25 +54,50 @@ public class TripController {
 	}
 	
 	@RequestMapping(value={"addTrip"}, method=RequestMethod.POST)
-	public String saveTrip(@Valid @ModelAttribute("trip") Trip trip, BindingResult result, RedirectAttributes redirectAttributes){
+	public String saveTrip(@RequestParam("origin.id")int originId,
+			@RequestParam("destination.id")int destinationId,
+			@RequestParam("car.id")int carId, 
+			@Valid @ModelAttribute("trip") Trip trip, 
+			BindingResult result, RedirectAttributes redirectAttributes,
+			Model model){
+		
+		Place origin = placesService.getPlaceById(originId);
+		Place destination = placesService.getPlaceById(destinationId);
+		Car car = carService.getCarById(carId);
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    String name = auth.getName(); //get logged in username
+	    
+	    Member member = userservice.getMemberByUserName(name);
+		
+	    trip.setMember(member);
+		trip.setOrigin(origin);
+		trip.setDestination(destination);
+		trip.setCar(car);
 		
 		if(result.hasErrors()){
 			return "addTrip";
 		}
 		
 		redirectAttributes.addFlashAttribute("trip", trip);
-		//Save
+		
+		tripservice.saveTrip(trip);
+		
 		
 		return "redirect:/showTripDetails";
 	}
 	
 	@RequestMapping(value={"showTripDetails"}, method=RequestMethod.GET)
-	public String detailsTrip(){
-		return "tripDetails";
+	public String detailsTrip(Model model){
+		List<Trip> tripList = tripservice.getAllTrip();
+		model.addAttribute("trips", tripList);
+		return "tripList";
 	}
 	
-	@RequestMapping(value={"tripList"})
-	public String tripTrip(){
+	@RequestMapping(value={"tripList"}, method=RequestMethod.POST)
+	public String tripTrip(Model model){
+		List<Trip> tripList = tripservice.getAllTrip();
+		model.addAttribute("trips", tripList);
 		return "tripList";
 	}
 }

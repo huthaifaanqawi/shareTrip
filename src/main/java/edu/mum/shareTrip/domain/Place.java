@@ -12,7 +12,7 @@ public class Place {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="ID")
-	private int id;
+	private long id;
 	
 	@Column(name="CITY")
 	private String city;
@@ -26,11 +26,11 @@ public class Place {
 	@Column(name="ZIP_CODE")
 	private String zipCode;
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 

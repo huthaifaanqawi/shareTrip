@@ -21,11 +21,11 @@
 		</p>
 		<p>
 		    <label for="departure"><spring:message code="trip.dateDeparture"/></label>
-		    <form:input path="departure" />
+		    <form:input path="departTime" />
 		</p>
 		<p>
 		    <label for="arrival"><spring:message code="trip.dateArrival"/></label>
-		    <form:input path="arrival" />
+		    <form:input path="returnTime" />
 		</p>
 		<p>
 			<label for="type"><spring:message code="trip.type"/></label>
@@ -34,18 +34,20 @@
 		</p>
 		<p>
 		    <label for="origin"><spring:message code="trip.origin"/></label>
-		    <form:input path="origin" />
+		    <form:select id="placeslist" path="origin.id" 
+                	items="${placeslist}" itemLabel="city" itemValue="id"/>
 		</p>
 		<p>
 		    <label for="destination"><spring:message code="trip.destination"/></label>
-		    <form:input path="destination" />
+		    <form:select id="placeslist" path="destination.id" 
+                	items="${placeslist}" itemLabel="city" itemValue="id"/>
 		</p>
 		<p>
 			<label for="car"><spring:message code="trip.car"/></label>
-		    <form:select id="carlist" path="car" 
-                	items="${carList}" itemLabel="plaque" itemValue="id"/>
+		    <form:select id="carlist" path="car.id" 
+                	items="${carlist}" itemLabel="plaque" itemValue="id"/>
 		</p>
-		<!--  -->
+
 		<input id="reset" type="reset" value="Reset">
 		<input id="submit" type="submit" value="Add Trip">
 	</fieldset>

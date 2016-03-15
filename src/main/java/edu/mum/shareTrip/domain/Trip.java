@@ -48,6 +48,10 @@ public class Trip {
 	private String type;
 	
 	@NotNull
+	@Column(name="SEATS")
+	private Integer seats;
+	
+	@NotNull
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="ORIGIN_ID",referencedColumnName="ID")
 	private Place origin;
@@ -138,4 +142,19 @@ public class Trip {
 		this.description = description;
 	}
 	
+	public Member getMember(){
+		return member;
+	}
+	
+	public void setMember(Member member){
+		this.member = member;
+	}
+	
+	public Integer getSeats(){
+		return seats;
+	}
+	
+	public void setSeats(Integer seats){
+		this.seats = seats;
+	}
 }
