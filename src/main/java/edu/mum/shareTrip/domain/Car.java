@@ -12,7 +12,7 @@ public class Car {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="ID")
-	private int id;
+	private long id;
 	
 	@Column(name="SIZE")
 	private int size;
@@ -25,12 +25,14 @@ public class Car {
 	
 	@Column(name="PRICE_PER_DAY")
 	private int pricePerDay;
+	
+	private String plaque;
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -64,5 +66,13 @@ public class Car {
 
 	public void setPricePerDay(int pricePerDay) {
 		this.pricePerDay = pricePerDay;
+	}
+
+	public String getPlaque() {
+		return plaque;
+	}
+
+	public void setPlaque(String plaque) {
+		this.plaque = plaque;
 	}
 }
