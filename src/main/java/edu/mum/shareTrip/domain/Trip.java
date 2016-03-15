@@ -63,8 +63,8 @@ public class Trip {
 	
 	@NotNull
 	@OneToOne
-	@JoinColumn(name="CAR_ID",referencedColumnName="ID")
-	private Car car;
+	@JoinColumn(name="VEHICLE_ID",referencedColumnName="ID")
+	private Vechile vehicle;
 	
 	@ManyToOne
 	@JoinColumn(name="MEMBER_ID",referencedColumnName="ID")
@@ -118,12 +118,12 @@ public class Trip {
 		this.destination = destination;
 	}
 
-	public Car getCar() {
-		return car;
+	public Vechile getVehicle() {
+		return vehicle;
 	}
 
-	public void setCar(Car car) {
-		this.car = car;
+	public void setVehicle(Vechile vehicle) {
+		this.vehicle = vehicle;
 	}
 	
 	public String getTitle() {
