@@ -14,16 +14,18 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-
-import edu.mum.shareTrip.domain.Member;
 import edu.mum.shareTrip.domain.Vechile;
+import edu.mum.shareTrip.service.RentalService;
 import edu.mum.shareTrip.service.VechileService;
 
 @Controller
 public class VechileController {
       @Autowired
      VechileService vechileService;
+      RentalService rentalService;
 	@RequestMapping(value={"borrowList"},method=RequestMethod.GET)
 	public String borrowVechile(Model model)
 	{
@@ -65,5 +67,11 @@ public class VechileController {
 	public String userBorrowList( Model model)
 	{
 		return "userBorrowList";
+	}
+@RequestMapping(value="rent", method=RequestMethod.PUT)
+public @ResponseBody String rent(@RequestParam("id")int id)
+	{
+	
+		return "Message";
 	}
 }
