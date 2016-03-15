@@ -67,10 +67,15 @@ public class TripController {
 		Place destination = placesService.getPlaceById(destinationId);
 		Vechile car = vehicleService.getVehicleById(carId);
 		
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	    String name = auth.getName(); //get logged in username
-	    
-	    Member member = userservice.getMemberByUserName(name);
+		Member member =  new Member();
+		member.setFirstName("Ana");
+		member.setLastName("Smith");
+		member.setId(1);
+		
+//		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//	    String name = auth.getName(); //get logged in username
+//	    
+//	    Member member = userservice.getMemberByUserName(name);
 		
 	    trip.setMember(member);
 		trip.setOrigin(origin);

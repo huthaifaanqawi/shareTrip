@@ -43,9 +43,9 @@
                 	items="${placeslist}" itemLabel="city" itemValue="id"/>
 		</p>
 		<p>
-			<label for="car"><spring:message code="trip.car"/></label>
-		    <form:select id="carlist" path="car.id" 
-                	items="${carlist}" itemLabel="plaque" itemValue="id"/>
+			<label for="car"><spring:message code="trip.vehicle"/></label>
+		    <form:select id="carlist" path="vehicle.id" 
+                	items="${carlist}" itemLabel="plateNumber" itemValue="id"/>
 		</p>
 
 		<input id="reset" type="reset" value="Reset">
