@@ -16,5 +16,9 @@ public class VechileServiceImpl implements VechileService{
 	public List<Vechile> getAll() {
 	return (List<Vechile>)vechileRepository.findAll();
 	}
+	@Override
+	public Vechile getVehicleById(int id) {
+		return vechileRepository.findOne((long)id);
+	}
 
 }
