@@ -3,10 +3,9 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>Registration</title>
+<title>Sign Up</title>
 </head>
 <body>
-	<h1>Registration Form</h1>
 	<br />
 	<div id="global">
 		<form:form commandName="member" action="registration" method="post">
