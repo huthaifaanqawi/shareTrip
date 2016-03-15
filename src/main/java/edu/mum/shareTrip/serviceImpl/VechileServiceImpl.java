@@ -20,5 +20,9 @@ public class VechileServiceImpl implements VechileService{
 	public Vechile getVehicleById(int id) {
 		return vechileRepository.findOne((long)id);
 	}
+	@Override
+	public Vechile save(Vechile vechile) {
+		return vechileRepository.save(vechile)	;
+		}
 
 }

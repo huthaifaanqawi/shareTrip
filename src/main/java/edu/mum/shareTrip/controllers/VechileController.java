@@ -3,6 +3,7 @@ package edu.mum.shareTrip.controllers;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ import edu.mum.shareTrip.service.VechileService;
 
 @Controller
 public class VechileController {
-     @Autowired
+      @Autowired
      VechileService vechileService;
 	@RequestMapping(value={"borrowList"},method=RequestMethod.GET)
 	public String borrowVechile(Model model)
@@ -34,12 +35,13 @@ public class VechileController {
 		return "addVehicle";
 	}
 	@RequestMapping(value={"addVehicle"},method=RequestMethod.POST)
-	public String saveVechile(@Valid@ModelAttribute("vechile") Vechile vechile,  BindingResult result,Model model)
+	public String saveVechile(@Valid@ModelAttribute("vechile") Vechile vechile,  BindingResult result,HttpServletRequest request)
 	{
-		Member member= new Member();
-		member.setFirstName("Ahmad");
-		vechile.setMember(member);
-	//	vechileService.save(vechile);
+		if(result.hasErrors())
+			{
+			return "addVehicle";
+			}
+	vechileService.save(vechile);
 		if(result.hasErrors())
 			return "addVehicle";
 		return "redirect:/userBorrowList";
