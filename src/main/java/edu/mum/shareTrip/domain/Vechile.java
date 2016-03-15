@@ -35,13 +35,13 @@ public class Vechile {
 	@Column(name="TYPE")
 	private String type;
 	
-	@Column(name="SEAT_TYPE")
+	@Column(name="SEAT_NUMBER")
 	@NotNull(message="{edu.mum.shareTrip.domain.Vechile.seatNumber.null}")
 	@Min(value=1, message="{edu.mum.shareTrip.domain.Vechile.seatNumber.min}")
 	@Max(value=40, message="{edu.mum.shareTrip.domain.Vechile.seatNumber.max}")
 	private int seatNumber;
 	
-	@Column(name="PRICE_PER_FAY")
+	@Column(name="PRICE_PER_DAY")
 	@NotNull(message="{edu.mum.shareTrip.domain.Vechile.pricePerDay.null}")
 	@Min(value=5, message="{edu.mum.shareTrip.domain.Vechile.pricePerDay.min}")
 	private double pricePerDay;
@@ -57,9 +57,12 @@ public class Vechile {
 	@Size(min=5, message="{edu.mum.shareTrip.domain.Vechile.description}")
 	@Column(name="DESCRIPTION")
 	private String description;
-	
-	@DateTimeFormat(style = "S-")
+
+	@Column(name="DATE_REGISTER")
 	private Date addDate;
+	
+    @NotEmpty(message="{edu.mum.shareTrip.domain.Vechile.status}") 
+    @Column(name="STATUS")
   private String status;
 	    
 	    

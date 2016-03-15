@@ -32,7 +32,7 @@
 		<!-- Message Spring MVC Resource -->
 		<mvc:resources  location="/resources/"  mapping="/resources/**"/>
 		<bean id= "messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
-   		<property name="basenames" value="messages"/> 
+   		<property name="basenames" value="messages,usermessages,tripmessages,vechilemessages"/> 
     	<property name="defaultEncoding" value="UTF-8"/>
 	</bean>
 	<!-- end Message Spring MVC  -->

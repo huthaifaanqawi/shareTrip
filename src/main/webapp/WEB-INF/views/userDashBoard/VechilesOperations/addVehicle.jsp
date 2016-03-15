@@ -91,6 +91,9 @@
 						<form:errors path="vechileImage"/>
 					</div>
 				</div>
+				<div>
+				<input type="submit" value="Submit"/>
+				</div>
 			</form:form>
 </body>
 </html>
