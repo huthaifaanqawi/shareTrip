@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 @Entity(name="RENTAL")
@@ -28,6 +29,10 @@ public class Rental {
 	@OneToOne
 	@JoinColumn(name="CAR_ID",referencedColumnName="ID")
 	private Car car;
+	
+	@ManyToOne
+	@JoinColumn(name="MEMBER_ID",referencedColumnName="ID")
+	private Member member;
 
 	public int getId() {
 		return id;
@@ -60,4 +65,13 @@ public class Rental {
 	public void setCar(Car car) {
 		this.car = car;
 	}
+
+	public Member getMember() {
+		return member;
+	}
+
+	public void setMember(Member member) {
+		this.member = member;
+	}
+	
 }

@@ -14,14 +14,17 @@ import edu.mum.shareTrip.domain.Member;
 @Controller
 public class UserController {
 	
-	@RequestMapping(value={"signUp"},method=RequestMethod.GET)
+	@RequestMapping(value={"/signUp"},method=RequestMethod.GET)
 	public String inputMember(@ModelAttribute("member") Member member){
 		return "signUp";
 	}
 	
+	@RequestMapping(value={"/register"},method=RequestMethod.POST)
 	public String processMemberInfo(@Valid @ModelAttribute("member") Member memberToRegister,
 			RedirectAttributes redirectAttributes,BindingResult bindingResult){
-		
+		if(bindingResult.hasErrors()){
+			return "signUp";
+		}
 		return "";
 	}
 }

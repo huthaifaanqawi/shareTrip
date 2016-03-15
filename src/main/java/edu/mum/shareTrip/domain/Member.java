@@ -12,6 +12,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.Pattern;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity(name="MEMBER")
 public class Member {
@@ -22,42 +25,49 @@ public class Member {
 	private int id;
 	
 	@Column(name="FIRST_NAME")
+	@NotEmpty
+	//@Pattern(regexp="[a-zA-Z]*",message="first name is Not Valid")
 	private String firstName;
 	
 	@Column(name="LAST_NAME")
+	@NotEmpty
+	//@Pattern(regexp="[a-zA-Z]*",message="last name is Not Valid")
 	private String lastName;
 	
 	@Column(name="AGE")
 	private int age;
 	
 	@Column(name="PHONE")
+	@NotEmpty
 	private String phone;
 	
     @Column(name="EMAIL")
+    @NotEmpty
 	private String email;
     
     @Column(name="GENDER")
+    @NotEmpty
     private String gender;
 	
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="USERNAME",referencedColumnName="USERNAME")
 	private Credentials credentials;
 	
-	@OneToMany(fetch=FetchType.LAZY,cascade=CascadeType.REMOVE)
-	@JoinColumn(name="MEMBER_ID",referencedColumnName="ID")
+	@OneToMany(fetch=FetchType.LAZY,cascade=CascadeType.REMOVE,mappedBy="member")
 	private List<Book> bookList;
 	
-	@OneToMany(cascade=CascadeType.REMOVE,fetch=FetchType.LAZY)
-	@JoinColumn(name="MEMBER_ID",referencedColumnName="ID")
+	@OneToMany(cascade=CascadeType.REMOVE,fetch=FetchType.LAZY,mappedBy="member")
 	private List<Rental> rentals;
 	
-	@OneToMany(cascade={CascadeType.REMOVE},fetch=FetchType.LAZY)
-	@JoinColumn(name="MEMBER_ID",referencedColumnName="ID")
+	@OneToMany(cascade={CascadeType.REMOVE},fetch=FetchType.LAZY,mappedBy="member")
 	private List<Trip> trips;
 	
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="ADDRESS_ID",referencedColumnName="ID")
 	private Address address;
+	
+	@OneToMany(cascade=CascadeType.ALL,mappedBy="member")
+	private List<Vechile> vechile;
 
 	public Credentials getCredentials() {
 		return credentials;
@@ -153,6 +163,14 @@ public class Member {
 
 	public void setGender(String gender) {
 		this.gender = gender;
+	}
+
+	public List<Vechile> getVechile() {
+		return vechile;
+	}
+
+	public void setVechile(List<Vechile> vechile) {
+		this.vechile = vechile;
 	}
 	
 }

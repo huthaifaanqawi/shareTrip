@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 @Entity(name="BOOK")
@@ -37,6 +38,10 @@ public class Book {
 	@OneToOne
 	@JoinColumn(name="TRIP_ID",referencedColumnName="ID")
 	private Trip trip;
+	
+	@ManyToOne
+	@JoinColumn(name="MEMBER_ID",referencedColumnName="ID")
+	private Member member;
 
 	public int getId() {
 		return id;
@@ -93,4 +98,13 @@ public class Book {
 	public void setTrip(Trip trip) {
 		this.trip = trip;
 	}
+
+	public Member getMember() {
+		return member;
+	}
+
+	public void setMember(Member member) {
+		this.member = member;
+	}
+	
 }

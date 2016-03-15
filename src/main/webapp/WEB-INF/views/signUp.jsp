@@ -8,7 +8,7 @@
 <body>
 	<br />
 	<div id="global">
-		<form:form commandName="member" action="registration" method="post">
+		<form:form commandName="member" action="register" method="post">
 			<p>
 				<form:errors path="*" cssStyle="color : red;" />
 			</p>

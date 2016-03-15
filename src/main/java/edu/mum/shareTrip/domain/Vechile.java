@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -43,6 +45,9 @@ public class Vechile {
 	@Transient
 	private MultipartFile vechileImage;
 	
+	@ManyToOne
+	@JoinColumn(name="MEMBER_ID",referencedColumnName="ID")
+	private Member member;
 	public MultipartFile getVechileImage() {
 		return vechileImage;
 	}
@@ -78,6 +83,12 @@ public class Vechile {
 	}
 	public void setPricePerDay(double pricePerDay) {
 		this.pricePerDay = pricePerDay;
+	}
+	public Member getMember() {
+		return member;
+	}
+	public void setMember(Member member) {
+		this.member = member;
 	}
 	
 	
