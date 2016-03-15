@@ -7,8 +7,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import edu.mum.shareTrip.domain.Trip;
 
-@Service
-@Transactional
 public interface TripService {
 	public Trip saveTrip(Trip newTrip);
 	

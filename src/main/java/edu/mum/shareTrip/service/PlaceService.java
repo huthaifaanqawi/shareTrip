@@ -7,8 +7,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import edu.mum.shareTrip.domain.Place;
 
-@Service
-@Transactional
 public interface PlaceService {
 	
 	public List<Place> getAllPlaces();
