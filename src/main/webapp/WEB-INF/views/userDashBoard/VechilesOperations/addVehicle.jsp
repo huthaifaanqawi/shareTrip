@@ -27,9 +27,8 @@
 					<div>
 						<form:select path="type">
 						<form:option value="0">--Select Type</form:option>
-						<form:option value="1">Car</form:option>
-						<form:option value="2">Bicycle</form:option>
-						<form:option value="3">Truck</form:option>
+						<form:option value="Car">Car</form:option>
+						<form:option value="Bus">Bus</form:option>
 						</form:select>
 						<form:errors path="type"/>
 					</div>
@@ -47,7 +46,7 @@
 					<label for="plateNumber"><spring:message code="addVehicle.form.plateNumber"/></label>
 					<div>
 						<div>
-							<form:input id="plateNumber" path="seatNumber" type="text"/>
+							<form:input id="plateNumber" path="plateNumber" type="text"/>
 							<form:errors path="plateNumber"/>
 						</div>
 					</div>
@@ -78,7 +77,7 @@
 					<label for="status"><spring:message code="addVehicle.form.status"/></label>
 					<div>
 						<form:select path="status">
-						<form:option value="1">available</form:option>
+						<form:option value="available">available</form:option>
 						</form:select>
 						<form:errors path="status"/>
 					</div>

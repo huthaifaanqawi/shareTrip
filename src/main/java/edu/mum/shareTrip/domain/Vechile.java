@@ -8,14 +8,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Transient;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlTransient;
+
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity(name="VECHILE")
 public class Vechile {
@@ -25,42 +28,43 @@ public class Vechile {
     @Column(name="ID")
 	private long id;
     
-	@NotEmpty(message="edu.mum.shareTrip.domain.Vechile.vechileName.empty")
-	@Size(min=3, max=20, message="edu.mum.shareTrip.domain.Vechile.vechileName.charcter")
+	@NotEmpty
+	@Size(min=3, max=20)
 	@Column(name="VECHILE_NAME")
 	private String vechileName;
 	
 	
-	@NotEmpty(message="edu.mum.shareTrip.domain.Vechile.type.empty")
+	@NotEmpty
 	@Column(name="TYPE")
 	private String type;
 	
 	@Column(name="SEAT_NUMBER")
-	@NotNull(message="edu.mum.shareTrip.domain.Vechile.seatNumber.null")
-	@Min(value=1, message="edu.mum.shareTrip.domain.Vechile.seatNumber.min")
-	@Max(value=40, message="edu.mum.shareTrip.domain.Vechile.seatNumber.max")
+	@NotNull
+	@Min(value=1)
+	@Max(value=40)
 	private int seatNumber;
 	
 	@Column(name="PRICE_PER_DAY")
-	@NotNull(message="edu.mum.shareTrip.domain.Vechile.pricePerDay.null")
-	@Min(value=5, message="edu.mum.shareTrip.domain.Vechile.pricePerDay.min")
+	@NotNull
+	@Min(value=5)
 	private double pricePerDay;
 	
-	@Transient
+	
+	@JsonIgnore 
 	private MultipartFile vechileImage;
 	
-	@Size(min=3, max=20, message="edu.mum.shareTrip.domain.Vechile.plateNumber")
+	@Size(min=3, max=20)
 	@Column(name="PLATE_NUMER")
 	private String plateNumber;
 	
-	@Size(min=5, message="edu.mum.shareTrip.domain.Vechile.description")
+	@Size(min=5)
 	@Column(name="DESCRIPTION")
 	private String description;
 
 	@Column(name="DATE_REGISTER")
 	private Date addDate;
 	
-    @NotEmpty(message="edu.mum.shareTrip.domain.Vechile.status") 
+    @NotEmpty 
     @Column(name="STATUS")
   private String status;
 	    
@@ -90,7 +94,7 @@ public class Vechile {
 	public void setAddDate(Date addDate) {
 		this.addDate = addDate;
 	}
-
+	@XmlTransient  
 	public MultipartFile getVechileImage() {
 		return vechileImage;
 	}
