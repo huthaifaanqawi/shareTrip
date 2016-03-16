@@ -34,7 +34,7 @@
 			</p>
 			<p>
 				<label>Age:</label>
-				<form:input path="age" id="age" tabindex="5"/>
+				<form:input path="birthday" id="birthday" tabindex="5"/>
 			</p>
 			<p>
 				<label>Phone:</label>

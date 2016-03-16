@@ -10,9 +10,17 @@
         http://www.springframework.org/schema/context/spring-context.xsd">
 
 	<context:component-scan base-package="edu.mum.shareTrip" />
-	<mvc:annotation-driven />
-	<mvc:annotation-driven  validator="validator"/>
+	<!-- <mvc:annotation-driven /> -->
+	<mvc:annotation-driven  validator="validator" conversion-service="conversionService"/>
 	
+	<bean id="conversionService" 
+	        class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+	    <property name="formatters">
+	        <set>
+	            <bean class="edu.mum.shareTrip.formatter.DateFormatter"></bean>
+	        </set>
+	    </property>
+	</bean>
 	<!-- start tiles -->
 	<!-- enable tiles -->
 	<bean id="shareTripViewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
