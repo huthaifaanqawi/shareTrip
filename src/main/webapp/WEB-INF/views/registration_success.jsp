@@ -8,7 +8,7 @@
 </head>
 <body>
       <div class="alert alert-success">
-        <strong>Success!</strong> Congratulation, you registered Successfully
+        <strong>Success!</strong> Congratulation, you registered Successfully, click <a href="./login">here</a> to Login
      </div>
 </body>
 </html>

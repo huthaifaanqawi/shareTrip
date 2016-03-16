@@ -25,9 +25,6 @@
     }
 </script>
 <title>Sign Up</title>
-<style type="text/css">
-.form-control{width: 300px;}
-</style>
 </head>
 <body>
 	<br />

@@ -1,7 +1,10 @@
 package edu.mum.shareTrip.controllers;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import edu.mum.shareTrip.domain.Credentials;
 
 @Controller
 public class HomeController {
@@ -19,7 +22,7 @@ public class HomeController {
 		return "contactUs";
 	}
 	@RequestMapping(value={"login"})
-	public String login(){
+	public String login(@ModelAttribute("user") Credentials user){
 		return "login";
 	}
 	@RequestMapping(value={"logout"})

@@ -12,6 +12,7 @@
 <title><tiles:insertAttribute name="title" /></title>
 <link href="http://getbootstrap.com/dist/css/bootstrap.css"	rel="stylesheet">
 <link href="http://getbootstrap.com/examples/jumbotron/jumbotron.css" rel="stylesheet">
+<style type="text/css">@import url("<spring:url value="/css/style.css"/>");</style>
 </head>
 
 <body>
