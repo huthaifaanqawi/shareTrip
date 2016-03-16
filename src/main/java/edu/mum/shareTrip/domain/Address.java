@@ -5,6 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Pattern;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity(name="ADDRESS")
 public class Address {
@@ -15,15 +18,22 @@ public class Address {
 	private int id;
 	
 	@Column(name="CITY")
+	@NotEmpty
+	@Pattern(regexp="[A-Za-z]{6,}")
 	private String city;
 	
 	@Column(name="STATE")
+	@NotEmpty
+	@Pattern(regexp="[A-Z]{2}")
 	private String state;
 	
 	@Column(name="STREET")
+	@NotEmpty
+	@Pattern(regexp="^([0-9]+ )?[a-zA-Z ]+$")
 	private String street;
 	
 	@Column(name="ZIP_CODE")
+	@Pattern(regexp="^[0-9]{5}(?:-[0-9]{4})?$")
 	private String zipCode;
 
 	public int getId() {

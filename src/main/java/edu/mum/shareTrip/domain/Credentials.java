@@ -9,21 +9,28 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity(name = "USERS")
 public class Credentials {
 
 	@Id
 	@Column(name = "USERNAME", nullable = false, unique = true)
+	@NotEmpty
+	@Pattern(regexp="[A-Za-z]*")
 	private String username;
+	
 	@Column(name = "PASSWORD", nullable = false)
+	@Pattern(regexp="[A-Za-z0-9]{6,8}")
+	@NotEmpty
 	private String password;
 	
 	@Column(name = "VERIFY_PASSWORD", nullable = false)
 	private String verifyPassword;
 	
-	@Column(name = "ENABLED", nullable = false)
-	private Boolean enabled;
 
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "USERNAME")
@@ -51,14 +58,6 @@ public class Credentials {
 
 	public void setVerifyPassword(String verifyPassword) {
 		this.verifyPassword = verifyPassword;
-	}
-
-	public Boolean getEnabled() {
-		return enabled;
-	}
-
-	public void setEnabled(Boolean enabled) {
-		this.enabled = enabled;
 	}
 
 	public List<Authority> getAuthority() {

@@ -1,5 +1,7 @@
 package edu.mum.shareTrip.domain;
 
+import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -12,12 +14,19 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
+import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import edu.mum.shareTrip.validator.Credential;
+
 @Entity(name="MEMBER")
-public class Member {
+public class Member implements Serializable{
+
+	private static final long serialVersionUID = 4939605490184287786L;
 
 	@Id
 	@Column(name="ID", nullable=false ,unique = true)
@@ -26,22 +35,24 @@ public class Member {
 	
 	@Column(name="FIRST_NAME")
 	@NotEmpty
-	//@Pattern(regexp="[a-zA-Z]*",message="first name is Not Valid")
+	@Pattern(regexp="[a-zA-Z]*",message="first name is Not Valid")
 	private String firstName;
 	
 	@Column(name="LAST_NAME")
 	@NotEmpty
-	//@Pattern(regexp="[a-zA-Z]*",message="last name is Not Valid")
+	@Pattern(regexp="[a-zA-Z]*",message="last name is Not Valid")
 	private String lastName;
 	
-	@Column(name="AGE")
-	private int age;
+	@Column(name="BIRTHDAY")
+	@NotNull
+	private Date birthday;
 	
 	@Column(name="PHONE")
 	@NotEmpty
 	private String phone;
 	
     @Column(name="EMAIL")
+    @Email
     @NotEmpty
 	private String email;
     
@@ -51,6 +62,8 @@ public class Member {
 	
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="USERNAME",referencedColumnName="USERNAME")
+	@Valid
+	@Credential(message="Passwords Dont match")
 	private Credentials credentials;
 	
 	@OneToMany(fetch=FetchType.LAZY,cascade=CascadeType.REMOVE,mappedBy="member")
@@ -64,6 +77,7 @@ public class Member {
 	
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="ADDRESS_ID",referencedColumnName="ID")
+	@Valid
 	private Address address;
 	
 	@OneToMany(cascade=CascadeType.ALL,mappedBy="member")
@@ -101,12 +115,12 @@ public class Member {
 		this.lastName = lastName;
 	}
 
-	public int getAge() {
-		return age;
+	public Date getBirthday() {
+		return birthday;
 	}
 
-	public void setAge(int age) {
-		this.age = age;
+	public void setBirthday(Date birthday) {
+		this.birthday = birthday;
 	}
 
 	public String getPhone() {
