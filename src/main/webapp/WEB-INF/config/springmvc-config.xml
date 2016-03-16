@@ -18,6 +18,7 @@
 	    <property name="formatters">
 	        <set>
 	            <bean class="edu.mum.shareTrip.formatter.DateFormatter"></bean>
+	            <bean class="edu.mum.shareTrip.formatter.AuthorityFormatter"></bean>
 	        </set>
 	    </property>
 	</bean>

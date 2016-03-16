@@ -1,8 +1,27 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE HTML>
 <html>
 <head>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script type="text/javascript">
+    function isUserExists(){
+    	$.ajax({
+    		url:'/shareTrip/getUser/'+$("#username").val(),
+    		type:'GET',
+    		contentType:'application/json',
+    		success:function(){
+    			$("#userExistsError").css("display", "none"); 
+    		},
+    		error:function(errorObject){
+    			if(errorObject.responseJSON.errorType="UserAlreadyExists"){
+    				$("#userExistsError").css("display", "inline-block"); 
+    			}
+    		}
+    	});
+    }
+</script>
 <title>Sign Up</title>
 </head>
 <body>
@@ -33,7 +52,7 @@
 				</form:select>
 			</p>
 			<p>
-				<label>Age:</label>
+				<label>Birthday:</label>
 				<form:input path="birthday" id="birthday" tabindex="5"/>
 			</p>
 			<p>
@@ -42,7 +61,10 @@
 			</p>
 			<p>
 				<label>Username:</label>
-				<form:input path="credentials.username" id="username" tabindex="5"/>
+				<form:input path="credentials.username" onblur="isUserExists()" id="username" tabindex="5"/>
+			</p>
+			<p id="userExistsError" style="display: none;clear:both;">
+			    <label style="color:red;">Username is used</label>
 			</p>
 			<p>
 				<label>Password:</label>
@@ -51,6 +73,10 @@
 			<p>
 				<label>Confirm Password:</label>
 				<form:input type="password" path="credentials.verifyPassword" id="confirm_password" tabindex="5"/>
+			</p>
+			<p>
+				<label>Role:</label>
+				<form:input value="ROLE_USER" path="credentials.authority" id="authoroties" tabindex="10"/>
 			</p>
 			<h1>Address</h1>
 			<p>

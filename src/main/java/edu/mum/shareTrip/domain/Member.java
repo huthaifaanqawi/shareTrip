@@ -20,6 +20,7 @@ import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import edu.mum.shareTrip.validator.Credential;
 
@@ -45,6 +46,7 @@ public class Member implements Serializable{
 	
 	@Column(name="BIRTHDAY")
 	@NotNull
+	@DateTimeFormat(pattern="MM-dd-yyyy")
 	private Date birthday;
 	
 	@Column(name="PHONE")

@@ -14,8 +14,6 @@ public class Authority {
 	@Column(name = "ID",unique=true,nullable=false)
 	private int id;
 
-	@Column(name = "USERNAME", nullable = false)
-	private String username;
 	@Column(name = "AUTHORITY", nullable = false)
 	private String authority;
 
@@ -25,14 +23,6 @@ public class Authority {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
 	}
 
 	public String getAuthority() {

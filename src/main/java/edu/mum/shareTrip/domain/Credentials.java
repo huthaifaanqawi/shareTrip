@@ -33,7 +33,7 @@ public class Credentials {
 	
 
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "USERNAME")
+	@JoinColumn(name = "USERNAME",referencedColumnName="USERNAME")
 	private List<Authority> authority;
 
 	public String getUsername() {
