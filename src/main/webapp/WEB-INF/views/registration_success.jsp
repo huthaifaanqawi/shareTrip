@@ -7,6 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-      Congratulation, You Registered Successfully
+      <div class="alert alert-success">
+        <strong>Success!</strong> Congratulation, you registered Successfully
+     </div>
 </body>
 </html>
