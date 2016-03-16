@@ -8,4 +8,5 @@ public interface VechileService {
 List<Vechile> getAll();
 Vechile getVehicleById(int vechileId);
 Vechile save(Vechile vechile);
+List<Vechile> getUserVehicles(int member_Id);
 }

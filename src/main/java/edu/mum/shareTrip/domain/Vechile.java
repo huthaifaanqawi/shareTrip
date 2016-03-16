@@ -8,17 +8,21 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlTransient;
 
+
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+
 
 @Entity(name="VECHILE")
 public class Vechile {
@@ -51,6 +55,7 @@ public class Vechile {
 	
 	
 	@JsonIgnore 
+	@Transient
 	private MultipartFile vechileImage;
 	
 	@Size(min=3, max=20)

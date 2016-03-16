@@ -24,5 +24,9 @@ public class VechileServiceImpl implements VechileService{
 	public Vechile save(Vechile vechile) {
 		return vechileRepository.save(vechile)	;
 		}
+	@Override
+	public List<Vechile> getUserVehicles(int member_Id) {
+	return	vechileRepository.getUserVehicles((Integer)(member_Id));
+	}
 
 }

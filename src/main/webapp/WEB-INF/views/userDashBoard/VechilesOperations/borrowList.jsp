@@ -46,8 +46,7 @@
 					<td>${vehicle.seatNumber}</td>
 					<td>${vehicle. pricePerDay}</td>
 					<td>${vehicle. description}</td>
-					<td><a href="#"> <span
-							class="glyphicon glyphicon-remove" /></span> Rent
+					<td><a href="#"  onclick="getVechile('${vehicle.id}')"><span class="glyphicon glyphicon-ok" /></span> Rent
 					</a></td>
 				</tr>
 		</c:forEach>
@@ -55,8 +54,61 @@
 				
 			</table>
 			
-			
+				<div id="vechileform" style="display:none" > </div>
+			 <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Rent Vehicle</h4>
+        </div>
+        <div class="modal-body">
+          <p>This is a large modal.</p>
+          	<table class="table table-hover">
+				<tr>
+					<td><spring:message code="addVehicle.form.vechileName"/></td>
+					<td id="vechileNameRent"></td>
+				</tr>
+			</table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 		</div>
 	</section>
+	<script type="text/javascript">
+	
+	function getVechile(vechile_id){
+		var contextRoot = "/" + window.location.pathname.split( '/' )[1];
+		var dataToSend = {"id":vechile_id};
+		console.log(dataToSend);
+		$.ajax({
+			type: 'GET',
+			url: contextRoot + "/getVechile",
+			dataType: "json",  
+	 		//data:dataToSend,
+	 		contentType: 'application/json',
+			success: function( vechile ) {
+				alert("success");
+// 				          console.log(vechile.vechileName)
+// 				$('#vechileNameRent').append( vechile.vechileName);
+// 				$("#myModal").modal("show") 
+			},
+
+			error: function(){
+				alert("errro");
+			}
+		});
+	}
+
+	
+	
+	</script>
 </body>
 </html>
