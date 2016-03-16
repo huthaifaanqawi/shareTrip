@@ -100,6 +100,10 @@
 	<put-attribute name="body" value="/WEB-INF/views/userDashBoard/VechilesOperations/addVehicle.jsp"></put-attribute>
 	</definition>
 	<!-- end Add Vehicle -->
+	<definition name="rentVechile" extends="userDashBoard"> 
+	<put-attribute name="title" value="rent Vechile" />
+	<put-attribute name="body" value="/WEB-INF/views/userDashBoard/VechilesOperations/rentVechile.jsp"></put-attribute>
+	</definition>
 		<!-- User Borrow List -->
 	<definition name="userBorrowList" extends="userDashBoard"> 
 	<put-attribute name="title" value="My Borrow List" />

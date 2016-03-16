@@ -39,6 +39,8 @@
 	<mvc:resources mapping="/css/**" location="/WEB-INF/resources/css/" />
 		<!-- end tiles -->
 		<!-- Message Spring MVC Resource -->
+		<mvc:annotation-driven/>
+		<mvc:resources  location="/WEB-INF/resources/images/"  mapping="/images/**"/>
 		<mvc:resources  location="/resources/"  mapping="/resources/**"/>
 		<bean id= "messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
    		<property name="basenames" value="messages,usermessages,tripmessages,vechilemessages"/> 
