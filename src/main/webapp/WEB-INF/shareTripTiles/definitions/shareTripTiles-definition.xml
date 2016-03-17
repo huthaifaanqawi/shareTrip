@@ -88,6 +88,13 @@
 	<put-attribute name="body" value="/WEB-INF/views/userDashBoard/TripOperations/addTrip.jsp"></put-attribute>
 	</definition>
 	<!-- end Trip List -->
+	<!-- Book List-->
+	<definition name="bookList" extends="userDashBoard">
+	<put-attribute name="heading" value="Member Book List" /> 
+	<put-attribute name="title" value="Book List" />
+	<put-attribute name="body" value="/WEB-INF/views/userDashBoard/TripOperations/bookList.jsp"></put-attribute>
+	</definition>
+	<!-- end Book List -->
 	<!-- Borrow List -->
 	<definition name="borrowList" extends="userDashBoard"> 
 	<put-attribute name="title" value="Borrow List" />
