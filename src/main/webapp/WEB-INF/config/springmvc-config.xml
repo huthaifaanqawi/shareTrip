@@ -37,6 +37,7 @@
 		</property>
 	</bean>
 	<mvc:resources mapping="/css/**" location="/WEB-INF/resources/css/" />
+	<mvc:resources mapping="/js/**" location="/WEB-INF/resources/js/" />
 		<!-- end tiles -->
 		<!-- Message Spring MVC Resource -->
 		<mvc:annotation-driven/>
@@ -66,5 +67,8 @@
 	<bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
 		<property name="defaultLocale" value="en_US"/>
 	</bean>
+	<bean id="messageAccessor" class="org.springframework.context.support.MessageSourceAccessor">
+    	<constructor-arg  ref="messageSource"/>
+	</bean> 
 	<!-- end MultiPart Resolver -->
 </beans>
