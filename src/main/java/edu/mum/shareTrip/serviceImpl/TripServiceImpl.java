@@ -25,4 +25,19 @@ public class TripServiceImpl implements TripService{
 	public List<Trip> getAllTrip(){
 		return (List<Trip>) tripRepository.findAll();
 	}
+
+	@Override
+	public Trip getTripById(long id) {
+		return tripRepository.findOne(id);
+	}
+
+	@Override
+	public List<Trip> getTripsWithSeats() {
+		return tripRepository.getTripsWithSeats();
+	}
+
+	@Override
+	public List<Trip> getTripsByMemberBook(long id) {
+		return tripRepository.getTripsByMemberBook(id);
+	}
 }
