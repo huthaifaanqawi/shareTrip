@@ -40,38 +40,35 @@
 				</p>
 				<p>
 				<form:form commandName="rental" method="post" >
+				<input type="text" name="vechile.id" style="display: none;" value="${vechile.id}" />
 					<div>
 					<strong><spring:message code="addVehicle.form.fromDate"/></strong>
 					<div>
-						<form:input id="fromDate" name="fromDate" type="text" onblur="checkdate(${vechile.addDate})"/>
-						<label class="col-xs-2" id="pastDate" style="color:red;display: none;">Username is used</label>
+						<form:input id="fromDate" path="fromDate" type="date"/>
+						<form:errors path="fromDate"></form:errors>
+						<label class="col-xs-2" id="pastDate" style="color:red;display: none;">please add date more than this date</label>
 					</div>
 				</div>
 		<div>
 		<strong><spring:message code="addVehicle.form.toDate"/></strong>
 			<div>
-						<form:input id="toDate" name="toDate" type="text"/>
-						<label class="col-xs-2" id="toDate" style="color:red;display: none;">Username is used</label>
+						<form:input id="toDate" path="toDate" type="text"/>
+					<form:errors path="toDate"></form:errors>
 					
 						</div>
 				</div>
 				<strong><spring:message code="addVehicle.form.unitPrice"/></strong>
 			<div>
-						<form:input id="unitPrice" name="unitPrice" type="text"/>
+						<form:input id="unitPrice"  disabled="disabled" path="unitPrice" type="text"/>
 			</div>
-			<div>
-				<input type="submit" value="Submit"/>
-			</div>
-			</form:form>
-				<h4></h4>
-			
- 					<a href="#" class="btn btn-warning btn-large" ng-click="addToCart('${vechile.id}')"> 
-<span class="glyphicon-shopping-cart glyphicon"></span> Rent Now </a>
-<a href="<spring:url value="/rentVechile" />" class="btn btn-default">
-	<span class="glyphicon-hand-right glyphicon"></span> View myList
+<input id="rent" disabled="disabled" type="submit" value="Rent Now"> 
+</form:form>
+<label class="col-xs-2" id="userisOwner" style="color:red;display: none;">you can't rent your car</label>
+<a href="<spring:url value="/userRentLList" />" >
+	<span class=""></span> View my Rent List
 </a>
 
- <a href="<spring:url value="/borrowList" />" class="btn btn-default">
+ <a href="<spring:url value="/borrowList" />" >
 						<span class="glyphicon-hand-left glyphicon"></span> back
 					</a>
 
@@ -85,28 +82,27 @@
  	 <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 	<script type="text/javascript">
-	
-	function getVechile(vechile_id){
+	$( document ).ready(function() {
 		var contextRoot = "/" + window.location.pathname.split( '/' )[1];
-		var dataToSend = {"id":vechile_id};
-		var data = JSON.stringify(dataToSend);
-		console.log(data);
-		console.log(dataToSend);
+		var data = {"vechileid":$("#vechileid").val()};
 		$.ajax({
-				type:'GET',
-    		   url: '/shareTrip/getVechile/',
-    		   datatype:'json',
-    		   contentType: 'application/json',
-	 		    data: dataToSend ,
-			    success: function( ) {
-					},
-				error:function(errorObject){
-	    	//		if(errorObject.responseJSON.errorType="UserAlreadyExists"){
-	    			
-	    		//	}
-		}
-		});
-		}
+			type:'GET',
+		   url: contextRoot+'/rentUserCheckOwner',
+		   contentType: 'application/json',
+ 		    data: dataToSend ,
+		    success: function( message) {
+		    	if(message=="success")
+		    		{
+		    		$('#rent').prop('disabled', false)
+		    		}
+				},
+			error:function(errorObject){
+				$("#userisOwner").css("display", "inline-block");
+				$('#rent').prop('disabled', true)
+	}
+	});
+
+	});
 	</script>
 </body>
 </html>
