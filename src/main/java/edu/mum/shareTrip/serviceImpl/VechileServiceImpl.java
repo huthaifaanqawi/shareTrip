@@ -17,7 +17,7 @@ public class VechileServiceImpl implements VechileService{
 	return (List<Vechile>)vechileRepository.findAll();
 	}
 	@Override
-	public Vechile getVehicleById(int id) {
+	public Vechile getVehicleById(long id) {
 		return vechileRepository.findOne((long)id);
 	}
 	@Override
@@ -25,11 +25,11 @@ public class VechileServiceImpl implements VechileService{
 		return vechileRepository.save(vechile)	;
 		}
 	@Override
-	public List<Vechile> getUserVehicles(int member_Id) {
-	return	vechileRepository.getUserVehicles((Integer)(member_Id));
+	public List<Vechile> getUserVehicles(long member_Id) {
+	return	vechileRepository.getUserVehicles(member_Id);
 	}
 	@Override
-	public void updateStatus(int vechileId,String status) {	
+	public void updateStatus(long vechileId,String status) {	
 	vechileRepository.updateStatus(vechileId, status);
 	}
 	@Override
@@ -37,7 +37,7 @@ public class VechileServiceImpl implements VechileService{
 		return vechileRepository.getUserAvialbleVehicles(member_Id);
 	}
 	@Override
-	public Vechile checkIfOwner(int vechileid, int memberid) {
+	public Vechile checkIfOwner(long vechileid, long memberid) {
 		return vechileRepository.checkIfOwner(vechileid, memberid);
 	}
 
