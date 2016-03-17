@@ -49,7 +49,7 @@
 	</bean>
 	<!-- end Message Spring MVC  -->
 	<!-- Validation -->
-	 	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
 		<property name="validationMessageSource" ref="messageSource" />
 	</bean>
 	<!-- end Validation -->
