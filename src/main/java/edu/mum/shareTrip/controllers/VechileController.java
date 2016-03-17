@@ -1,12 +1,15 @@
 package edu.mum.shareTrip.controllers;
 
 import java.io.File;
+import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -42,21 +45,20 @@ public class VechileController {
 			{
 			return "addVehicle";
 			}
-	Member member=new Member();
-	member.setId(1);
-	newvechile.setMember(member);
+	Principal principal = request.getUserPrincipal();
+	newvechile.setMember((Member)((Authentication) principal).getPrincipal());
 	newvechile=vechileService.save(newvechile);
 
-		MultipartFile vechileImage = newvechile.getVechileImage();
-		String rootDirectory = request.getSession().getServletContext().getRealPath("/");
-		newvechile=vechileService.save(newvechile);
-			if (vechileImage!=null && !vechileImage.isEmpty()) {
-		       try {
-		    	   vechileImage.transferTo(new File(rootDirectory+"\\resources\\images\\"+newvechile.getId() + ".png"));
-		       } catch (Exception e) {
-				throw new RuntimeException("Product Image saving failed", e);
-		   }}
-		
+//		MultipartFile vechileImage = newvechile.getVechileImage();
+//		String rootDirectory = request.getSession().getServletContext().getRealPath("/");
+//		newvechile=vechileService.save(newvechile);
+//			if (vechileImage!=null && !vechileImage.isEmpty()) {
+//		       try {
+//		    	   vechileImage.transferTo(new File(rootDirectory+"\\resources\\images\\"+newvechile.getId() + ".png"));
+//		       } catch (Exception e) {
+//				throw new RuntimeException("Product Image saving failed", e);
+//		   }}
+//		
 		return "redirect:/borrowList";
 	}
 	@RequestMapping(value={"/userBorrowList"},method=RequestMethod.GET)

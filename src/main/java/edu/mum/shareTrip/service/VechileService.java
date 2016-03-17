@@ -6,10 +6,10 @@ import edu.mum.shareTrip.domain.Vechile;
 
 public interface VechileService {
 List<Vechile> getAll();
-Vechile getVehicleById(int vechileId);
+Vechile getVehicleById(long vechileId);
 Vechile save(Vechile vechile);
-List<Vechile> getUserVehicles(int member_Id);
-void updateStatus(int vechileId,String status);
+List<Vechile> getUserVehicles(long member_Id);
+void updateStatus(long vechileId,String status);
 List<Vechile>  UserAvailableVechile(long member_Id);
-Vechile checkIfOwner(int vechileid,int memberid);
+Vechile checkIfOwner(long vechileid,long memberid);
 }
