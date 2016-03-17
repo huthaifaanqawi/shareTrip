@@ -7,7 +7,14 @@
 </head>
 <body>
     <div class="jumbotron" class="form-horizontal">
-		<form:form modelAttribute="user" action="login" method="post" class="form-horizontal">
+		<form:form modelAttribute="user" action="postLogin" method="post" class="form-horizontal">
+			<div class="form-group">
+			    <c:if test="${not empty loginFailed}">
+					<div class="alert alert-danger">
+						Login Failed, Incorrect Username or Password<br />
+					</div>
+				</c:if>
+			</div>	
 		    <div class="form-group">
 			    <label class="col-xs-3 control-label" for="username">Username:</label>
 				<form:input class="col-xs-9 form-control" path="username" id="username" tabindex="1" />
