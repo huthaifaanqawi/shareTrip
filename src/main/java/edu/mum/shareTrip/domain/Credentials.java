@@ -9,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
@@ -29,6 +30,7 @@ public class Credentials {
 	private String password;
 	
 	@Column(name = "VERIFY_PASSWORD", nullable = false)
+	@Transient
 	private String verifyPassword;
 	
 
