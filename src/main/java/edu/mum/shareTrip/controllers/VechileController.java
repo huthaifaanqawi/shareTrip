@@ -1,5 +1,6 @@
 package edu.mum.shareTrip.controllers;
 
+import java.io.File;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import edu.mum.shareTrip.domain.Member;
 import edu.mum.shareTrip.domain.Vechile;
@@ -51,10 +54,22 @@ public class VechileController {
 	Member member=new Member();
 	member.setId(1);
 	newvechile.setMember(member);
-  	vechileService.save(newvechile);
-		if(result.hasErrors())
-			return "addVehicle";
-		return "redirect:/BorrowList";
+	
+	File uploadedFile = null; 
+		String rootDirectory = request.getSession().getServletContext() .getRealPath("/");
+		MultipartFile image = newvechile.getVechileImage();
+		System.out.println(image.getSize());
+		newvechile=vechileService.save(newvechile);
+	if (image != null && !image.isEmpty()) { 
+				try { 
+			uploadedFile = new File(rootDirectory + "/resources/images/" 
+						+  newvechile.getId()+ ".jpg"); 
+		image.transferTo(uploadedFile); 
+		} catch (Exception e) { 
+			throw new RuntimeException("Product Image saving failed", e); 
+	} 
+			}
+		return "redirect:/borrowList";
 	}
 	@RequestMapping(value={"/userBorrowList"},method=RequestMethod.GET)
 	public String userBorrowList( Model model)
@@ -64,11 +79,5 @@ public class VechileController {
 		return "userBorrowList";
 	}
     
-	@RequestMapping(value={"getVechile"},method=RequestMethod.GET)
-	
-	public @ResponseBody String userBorrowList(@RequestParam("id") @RequestBody Integer id)
-	{
-				return "Hello";
-	}
 
 }
