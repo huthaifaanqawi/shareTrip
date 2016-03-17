@@ -57,7 +57,7 @@ rental.setMember(member);
 rentalService.saveRental(rental);
 vechile.setStatus("rent");
 vechileService.save(vechile);
-return  "redirect:/userRentList";
+return  "redirect:userRentList";
 
 }
 @RequestMapping(value={"userRentList"} ,method=RequestMethod.GET)

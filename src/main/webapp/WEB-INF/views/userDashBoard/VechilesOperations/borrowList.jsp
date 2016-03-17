@@ -21,11 +21,7 @@
  	<section class="container" >
  		<div>
 
-			<div>
-				 <a href="#" class="btn btn-success pull-right"> <span
-					class="glyphicon-shopping-cart glyphicon"></span> Trip List
-				</a>
-			</div>
+			
 			<table class="table table-hover">
 				<tr>
 					<th>---ID---</th>
@@ -48,7 +44,7 @@
 					<td>${vehicle. description}</td>
 					<td>
 				<a
-									href=" <spring:url value="/rentVechile?id=${vehicle.id}" /> "
+									href=" <spring:url value="/userDashBoard/rentVechile?id=${vehicle.id}" /> "
 									class="btn btn-primary"> <span
 									class="glyphicon glyphicon-ok" /></span> Details
 								</a>	
@@ -66,32 +62,6 @@
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 		</div>
 	</section>
-	<script type="text/javascript">
 	
-	function getVechile(vechile_id){
-		var contextRoot = "/" + window.location.pathname.split( '/' )[1];
-		var dataToSend = {"id":vechile_id};
-		var data = JSON.stringify(dataToSend);
-		console.log(data);
-		console.log(dataToSend);
-		$.ajax({
-				type:'GET',
-    		   url: '/shareTrip/getVechile/',
-    		   datatype:'json',
-    		   contentType: 'application/json',
-	 		    data: dataToSend ,
-			    success: function( ) {
-					},
-				error:function(errorObject){
-	    	//		if(errorObject.responseJSON.errorType="UserAlreadyExists"){
-	    			
-	    		//	}
-		}
-		});
-		}
-
-	
-	
-	</script>
 </body>
 </html>

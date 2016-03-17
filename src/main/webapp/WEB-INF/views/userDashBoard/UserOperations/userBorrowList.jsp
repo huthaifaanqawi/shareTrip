@@ -13,11 +13,7 @@
 <body>
 
  	<section class="container" >
-			<div>
-				 <a href="#" class="btn btn-success pull-right"> <span
-					class="glyphicon-shopping-cart glyphicon"></span> Trip List
-				</a>
-			</div>
+			
 			<table class="table table-hover">
 				<tr>
 					<th>---ID---</th>
