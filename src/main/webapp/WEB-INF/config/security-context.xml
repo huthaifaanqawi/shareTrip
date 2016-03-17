@@ -12,7 +12,7 @@
 	<security:global-method-security pre-post-annotations="enabled"/>	
 	<security:http use-expressions="true">
 		
-	  <security:intercept-url pattern="/userDashBoard" access="hasAnyRole('ROLE_USER')"  />
+	  <security:intercept-url pattern="/userDashBoard/**" access="hasRole('ROLE_USER')"  />
  		<security:form-login 
  		 login-page="/login" 
 				login-processing-url="/postLogin"
