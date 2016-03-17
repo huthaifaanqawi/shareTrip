@@ -33,8 +33,12 @@ public class VechileServiceImpl implements VechileService{
 	vechileRepository.updateStatus(vechileId, status);
 	}
 	@Override
-	public List<Vechile> UserAvailableVechile(int member_Id) {
+	public List<Vechile> UserAvailableVechile(long member_Id) {
 		return vechileRepository.getUserAvialbleVehicles(member_Id);
+	}
+	@Override
+	public Vechile checkIfOwner(int vechileid, int memberid) {
+		return vechileRepository.checkIfOwner(vechileid, memberid);
 	}
 
 }
