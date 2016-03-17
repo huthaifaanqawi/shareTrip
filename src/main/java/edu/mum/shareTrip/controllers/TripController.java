@@ -1,10 +1,10 @@
 package edu.mum.shareTrip.controllers;
 
-import java.util.List;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -12,18 +12,18 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.mum.shareTrip.domain.Member;
 import edu.mum.shareTrip.domain.Place;
 import edu.mum.shareTrip.domain.Trip;
 import edu.mum.shareTrip.domain.Vechile;
+import edu.mum.shareTrip.service.MemberService;
 import edu.mum.shareTrip.service.PlaceService;
 import edu.mum.shareTrip.service.TripService;
-import edu.mum.shareTrip.service.UserService;
 import edu.mum.shareTrip.service.VechileService;
 
 @Controller
+@RequestMapping("userDashBoard")
 public class TripController {
 	
 	@Autowired
@@ -33,72 +33,64 @@ public class TripController {
 	VechileService vehicleService;
 	
 	@Autowired
-	TripService tripservice;
+	TripService tripService;
 	
 	@Autowired
-	UserService userservice;
+	MemberService memberService;
 	
 	@ModelAttribute
 	public void loadList(Model model){
 		model.addAttribute("placeslist", placesService.getAllPlaces());
-		model.addAttribute("carlist", vehicleService.getAll());
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    String name = auth.getName(); //get logged in username
+	    Member member = memberService.getMemberByUserName(name);
+		
+		model.addAttribute("carlist", vehicleService.getUserVehicles(member.getId()));
 	}
 	
 	@RequestMapping(value={"addTrip"}, method=RequestMethod.GET)
-	public String addTrip(@ModelAttribute("trip") Trip trip){
+	public String addTrip(Trip trip, Model model){
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    String name = auth.getName(); //get logged in username
+	    Member member = memberService.getMemberByUserName(name);
+	    trip.setMember(member);
+	    
+		model.addAttribute("trip", trip);
 		return "addTrip";
 	}
 	
 	@RequestMapping(value={"addTrip"}, method=RequestMethod.POST)
 	public String saveTrip(@RequestParam("origin.id")int originId,
 			@RequestParam("destination.id")int destinationId,
-			@RequestParam("car.id")int carId, 
+			@RequestParam("vehicle.id")int carId, 
 			@Valid @ModelAttribute("trip") Trip trip, 
-			BindingResult result, RedirectAttributes redirectAttributes,
+			BindingResult result, 
 			Model model){
-		
-		Place origin = placesService.getPlaceById(originId);
-		Place destination = placesService.getPlaceById(destinationId);
-		Vechile car = vehicleService.getVehicleById(carId);
-		
-		Member member =  new Member();
-		member.setFirstName("Ana");
-		member.setLastName("Smith");
-		member.setId(1);
-		
-//		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//	    String name = auth.getName(); //get logged in username
-//	    //
-//	    Member member = userservice.getMemberByUserName(name);
-		
-	    trip.setMember(member);
-		trip.setOrigin(origin);
-		trip.setDestination(destination);
-		trip.setVehicle(car);
 		
 		if(result.hasErrors()){
 			return "addTrip";
 		}
 		
-		redirectAttributes.addFlashAttribute("trip", trip);
+		Place origin = placesService.getPlaceById(originId);
+		Place destination = placesService.getPlaceById(destinationId);
+		Vechile car = vehicleService.getVehicleById(carId);
 		
-		tripservice.saveTrip(trip);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    String name = auth.getName(); //get logged in username
+	    Member member = memberService.getMemberByUserName(name);
+	    trip.setMember(member);
+	    
+		trip.setOrigin(origin);
+		trip.setDestination(destination);
+		trip.setVehicle(car);
+		trip.setSeats(car.getSeatNumber()-1);
 		
+		car.setStatus("TRIP");
+		vehicleService.save(car);
 		
-		return "redirect:/showTripDetails";
-	}
-	
-	@RequestMapping(value={"showTripDetails"}, method=RequestMethod.GET)
-	public String detailsTrip(Model model){
-		List<Trip> tripList = tripservice.getAllTrip();
-		model.addAttribute("trips", tripList);
-		return "tripList";
-	}
-	
-	@RequestMapping(value={"tripList"}, method=RequestMethod.POST)
-	public String tripTrip(Model model){
-		List<Trip> tripList = tripservice.getAllTrip();
-		model.addAttribute("trips", tripList);
-		return "tripList";
+		tripService.saveTrip(trip);
+		
+		return "redirect:/userDashBoard/tripList";
 	}
 }
