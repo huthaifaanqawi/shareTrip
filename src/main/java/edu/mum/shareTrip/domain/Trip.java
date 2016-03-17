@@ -16,14 +16,21 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import edu.mum.shareTrip.validator.DateTrip;
+import edu.mum.shareTrip.validator.Destination;
+import edu.mum.shareTrip.validator.UserAvailability;
+
 @Entity(name="TRIP")
+@Destination
+@DateTrip
+@UserAvailability //uncomment when it is ready
 public class Trip {
 
 	//
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="ID")
-	private int id;
+	private long id;
 	
 	@NotEmpty
 	@Column(name="TITLE")
@@ -34,12 +41,12 @@ public class Trip {
 	private String description;
 	
 	@NotNull
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@DateTimeFormat(pattern = "MM-dd-yyyy")
 	@Column(name="DEPART_TIME")
 	private Date departTime;
 	
 	@NotNull
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@DateTimeFormat(pattern = "MM-dd-yyyy")
 	@Column(name="RETURN_TIME")
 	private Date returnTime;
 	
@@ -47,7 +54,6 @@ public class Trip {
 	@Column(name="TYPE")
 	private String type;
 	
-	@NotNull
 	@Column(name="SEATS")
 	private Integer seats;
 	
@@ -70,11 +76,11 @@ public class Trip {
 	@JoinColumn(name="MEMBER_ID",referencedColumnName="ID")
     private Member member;
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 

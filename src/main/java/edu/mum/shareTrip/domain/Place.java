@@ -66,4 +66,10 @@ public class Place {
 		this.zipCode = zipCode;
 	}
 	
+	public boolean equals(Object object){
+		if(object!=null && object instanceof Place)
+			if(((Place)object).id==this.id)
+				return true;
+		return false;
+	}
 }
