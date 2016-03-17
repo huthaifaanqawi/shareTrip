@@ -16,11 +16,11 @@
 				</c:if>
 			</div>	
 		    <div class="form-group">
-			    <label class="col-xs-3 control-label" for="username">Username:</label>
+			    <label class="col-xs-3 control-label" for="username"><spring:message code="member.username" text="Username:"/></label>
 				<form:input class="col-xs-9 form-control" path="username" id="username" tabindex="1" />
 			</div>
 			<div class="form-group">
-			    <label class="col-xs-3 control-label" for="password">Password:</label>
+			    <label class="col-xs-3 control-label" for="password"><spring:message code="member.password" text="Password:"/></label>
 				<form:input type="password" class="col-xs-9 form-control" path="password" id="password" tabindex="2" />
 			</div>
 			<div class="form-group">
