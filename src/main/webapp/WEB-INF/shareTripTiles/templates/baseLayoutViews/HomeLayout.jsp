@@ -16,8 +16,8 @@
 </head>
 
 <body>
-
 	<div class="container">
+	    <div class="pull-right"><a href="?language=en">English</a>|<a href="?language=ar">Arabic</a></div>
 		<div class="header">
 			<ul class="nav nav-pills pull-right">
 				<tiles:insertAttribute name="navigation" />
