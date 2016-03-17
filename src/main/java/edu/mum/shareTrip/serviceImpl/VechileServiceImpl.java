@@ -40,5 +40,13 @@ public class VechileServiceImpl implements VechileService{
 	public Vechile checkIfOwner(long vechileid, long memberid) {
 		return vechileRepository.checkIfOwner(vechileid, memberid);
 	}
+	@Override
+	public List<Vechile> getAvialble() {
+		return vechileRepository.getAvialbleVehicles();
+	}
+	@Override
+	public Vechile CheckPlateFound(String plateNumber) {
+		return  vechileRepository.checkPlateNumber(plateNumber);
+	}
 
 }

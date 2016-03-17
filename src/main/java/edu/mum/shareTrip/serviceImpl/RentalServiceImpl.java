@@ -1,5 +1,7 @@
 package edu.mum.shareTrip.serviceImpl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +19,11 @@ public class RentalServiceImpl   implements RentalService {
 	@Override
 	public void saveRental(Rental rental) {
 		rentalrepository.save(rental);
+	}
+
+	@Override
+	public List<Rental> getUserRental(long memberid) {
+		return rentalrepository.getUserRentalList(memberid);
 	}
 
 }

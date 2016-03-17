@@ -11,7 +11,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.Future;
+import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.NumberFormat;
 import org.springframework.format.annotation.NumberFormat.Style;
 
@@ -22,15 +26,19 @@ public class Rental {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="ID")
 	private int id;
-	
+
+	@NotNull
+	@Future
 	@Column(name="FROM_DATE")
+	@DateTimeFormat(pattern = "MM/dd/yyyy")
 	private Date fromDate;
-	
+	@NotNull
+	@Future
+	@DateTimeFormat(pattern = "MM/dd/yyyy")
 	@Column(name="TO_DATE")
 	private Date toDate;
 	
 	@Column(name="COST")
-	@NumberFormat(style=Style.CURRENCY)
 	private BigDecimal unitPrice;
 	
 	@OneToOne

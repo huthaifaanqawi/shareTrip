@@ -87,18 +87,25 @@
 		var data = {"vechileid":$("#vechileid").val()};
 		$.ajax({
 			type:'GET',
-		   url: contextRoot+'/rentUserCheckOwner',
+		   url: '/shareTrip/rentUserCheckOwner/'+$("#vechileid").val(),
 		   contentType: 'application/json',
- 		    data: dataToSend ,
-		    success: function( message) {
-		    	if(message=="success")
+		    success: function( resopnse) {
+		    	if(resopnse.status==="hascar")
 		    		{
-		    		$('#rent').prop('disabled', false)
+		    		$("#userisOwner").css("display", "inline-block");
+		    		$('#rent').prop('disabled', true)
 		    		}
+		    	else if(response.status==="nocar"){
+		    		$("#userisOwner").css("display", "none");
+					$('#rent').prop('disabled', false)
+		    	}
 				},
 			error:function(errorObject){
-				$("#userisOwner").css("display", "inline-block");
-				$('#rent').prop('disabled', true)
+				if(errorObject.responseJSON.errorType="UserNotOwnerOfVechile")
+					{
+					$("#userisOwner").css("display", "inline-block");
+				$('#rent').prop('disabled', false);
+					}
 	}
 	});
 

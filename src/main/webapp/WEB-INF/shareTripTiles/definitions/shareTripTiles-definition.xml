@@ -111,12 +111,15 @@
 	<put-attribute name="title" value="rent Vechile" />
 	<put-attribute name="body" value="/WEB-INF/views/userDashBoard/VechilesOperations/rentVechile.jsp"></put-attribute>
 	</definition>
-		<!-- User Borrow List -->
+
 	<definition name="userBorrowList" extends="userDashBoard"> 
 	<put-attribute name="title" value="My Borrow List" />
 	<put-attribute name="body" value="/WEB-INF/views/userDashBoard/UserOperations/userBorrowList.jsp"></put-attribute>
 	</definition>
-	<!-- end User Borrow List -->
+<definition name="userRentList" extends="userDashBoard"> 
+	<put-attribute name="title" value="My Rent List" />
+	<put-attribute name="body" value="/WEB-INF/views/userDashBoard/UserOperations/userRentList.jsp"></put-attribute>
+	</definition>
 		<!-- User Trip List -->
 	<definition name="usertripList" extends="userDashBoard"> 
 	<put-attribute name="title" value="My Trip List" />

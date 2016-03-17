@@ -8,9 +8,11 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import edu.mum.shareTrip.domain.dto.DomainError;
 import edu.mum.shareTrip.domain.dto.DomainErrors;
+import edu.mum.shareTrip.exceptions.PlateNumberFoundException;
 import edu.mum.shareTrip.exceptions.UserDriverException;
 import edu.mum.shareTrip.exceptions.UserExistException;
 import edu.mum.shareTrip.exceptions.UserNotAvailableException;
+import edu.mum.shareTrip.exceptions.UserNotHaveVechileExpction;
 
 
 @ControllerAdvice
@@ -46,5 +48,25 @@ public class ExceptionController {
         errors.addError(error);
 		return errors;
 	}
+		@ExceptionHandler(UserNotHaveVechileExpction.class)
+		@ResponseStatus(HttpStatus.EXPECTATION_FAILED)
+		@ResponseBody
+		public DomainErrors handleException(UserNotHaveVechileExpction exception) {
+			DomainErrors errors = new DomainErrors();
+			errors.setErrorType("UserNotOwnerOfVechile");
+			return errors;
+			
+	}
+		
+		@ExceptionHandler(PlateNumberFoundException.class)
+		@ResponseStatus(HttpStatus.EXPECTATION_FAILED)
+		@ResponseBody
+		public DomainErrors handleException(PlateNumberFoundException exception) {
+			DomainErrors errors = new DomainErrors();
+			errors.setErrorType("TheVechileNumberFound");
+			DomainError error = new DomainError("The Vechile  PlateNumber is Found");
+	        errors.addError(error);
+			return errors;
+		}
 
 }

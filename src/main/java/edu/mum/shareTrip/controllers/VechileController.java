@@ -1,12 +1,5 @@
 package edu.mum.shareTrip.controllers;
-
-import java.io.File;
-import java.security.Principal;
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -14,22 +7,31 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import edu.mum.shareTrip.domain.JsonResponse;
 import edu.mum.shareTrip.domain.Member;
+import edu.mum.shareTrip.domain.Rental;
 import edu.mum.shareTrip.domain.Vechile;
+import edu.mum.shareTrip.exceptions.PlateNumberFoundException;
+import edu.mum.shareTrip.exceptions.UserNotHaveVechileExpction;
+import edu.mum.shareTrip.service.MemberService;
 import edu.mum.shareTrip.service.VechileService;
 
 @Controller
+@RequestMapping("userDashBoard")
 public class VechileController {
       @Autowired
      VechileService vechileService;
+      @Autowired MemberService memberService;
      @RequestMapping(value={"borrowList"},method=RequestMethod.GET)
 	public String borrowVechile(Model model)
 	{
-		List<Vechile> vechiles=vechileService.getAll();
+		List<Vechile> vechiles=vechileService.getAvialble();
 		model.addAttribute("vechiles", vechiles);
 		return "borrowList";
 	}
@@ -45,10 +47,11 @@ public class VechileController {
 			{
 			return "addVehicle";
 			}
-	Principal principal = request.getUserPrincipal();
-	newvechile.setMember((Member)((Authentication) principal).getPrincipal());
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String name = auth.getName(); 
+		Member member = memberService.getMemberByUserName(name);
+	newvechile.setMember(member);
 	newvechile=vechileService.save(newvechile);
-
 //		MultipartFile vechileImage = newvechile.getVechileImage();
 //		String rootDirectory = request.getSession().getServletContext().getRealPath("/");
 //		newvechile=vechileService.save(newvechile);
@@ -56,18 +59,33 @@ public class VechileController {
 //		       try {
 //		    	   vechileImage.transferTo(new File(rootDirectory+"\\resources\\images\\"+newvechile.getId() + ".png"));
 //		       } catch (Exception e) {
-//				throw new RuntimeException("Product Image saving failed", e);
+//				throw new RuntimeException(" Image saving failed", e);
 //		   }}
 //		
-		return "redirect:/borrowList";
+		return "redirect:userBorrowList";
 	}
-	@RequestMapping(value={"/userBorrowList"},method=RequestMethod.GET)
+	@RequestMapping(value={"userBorrowList"},method=RequestMethod.GET)
 	public String userBorrowList( Model model)
 	{
-	List<Vechile> vechiles=vechileService.getUserVehicles(1);
+	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	String name = auth.getName(); 
+	Member member = memberService.getMemberByUserName(name);
+	List<Vechile> vechiles=vechileService.getUserVehicles(member.getId());
 		model.addAttribute("vechiles", vechiles);
 		return "userBorrowList";
 	}
-    
+	@RequestMapping(value={"/checkPlate/{plateNumber}"} ,method=RequestMethod.GET)
+	public @ResponseBody JsonResponse  checkifowner(@PathVariable("plateNumber")  String plateNumber,Model model,@ModelAttribute Rental rental){
+JsonResponse res= new JsonResponse();
+	if(vechileService.CheckPlateFound(plateNumber).equals(null))
+			{
+		res.setStatus("nocar");
+		throw  new PlateNumberFoundException();
+			}
+	else {
+		res.setStatus("hascar");
+	}
+	return  res;
+	}
 
 }

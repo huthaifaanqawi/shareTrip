@@ -12,21 +12,23 @@
 </head>
 <body>
 
-    <h1>Add Vehicle Hello</h1>
- 
-      <form:form commandName="vechile" method="post" enctype="multipart/form-data">
-		
-                    <div>
-					<label for="vechileName"><spring:message code="addVehicle.form.vechileName"/></label>
+    <h1>Add Vehicle</h1>
+ <div class="jumbotron">
+      <form:form commandName="vechile" method="post" enctype="multipart/form-data"  class="form-horizontal">
+		  <p>
+  		     <form:errors path="*" cssStyle="color : red;" /> 
+        </p>
+                  <div class="form-group">
+					<label class="col-xs-3 control-label"  for="vechileName"><spring:message code="addVehicle.form.vechileName"/></label>
 					<div>
-                         	<form:input id="vechileName" path="vechileName" type="text"/>
+                         	<form:input class="col-xs-9 form-control"    id="vechileName" path="vechileName" type="text"/>
 							<form:errors path="vechileName"/>
 					</div>
 				</div>		
-			<div>
-				<label for="type"><spring:message code="addVehicle.form.vechileType"/></label>
-					<div>
-						<form:select path="type">
+			<div class="form-group">
+				<label class="col-xs-3 control-label"  for="type"><spring:message code="addVehicle.form.vechileType"/></label>
+					<div >
+						<form:select path="type" class="col-xs-9 form-control" >
 						<form:option value="0">--Select Type</form:option>
 						<form:option value="Car">Car</form:option>
 						<form:option value="Bus">Bus</form:option>
@@ -34,48 +36,49 @@
 						<form:errors path="type"/>
 					</div>
 				</div>
-				<div>
-					<label for="seatNumber"><spring:message code="addVehicle.form.seatNumber"/></label>
+			
+				<div class="form-group">
+					<label class="col-xs-3 control-label"  for="seatNumber"><spring:message code="addVehicle.form.seatNumber"/></label>
 					<div>
 						<div>
-							<form:input id="seatNumber" path="seatNumber" type="text"/>
+							<form:input  class="col-xs-9 form-control"   id="seatNumber" path="seatNumber" type="text"/>
 							<form:errors path="seatNumber"/>
 						</div>
 					</div>
 				</div>
-				<div>
-					<label for="plateNumber"><spring:message code="addVehicle.form.plateNumber"/></label>
-					<div>
+				<div class="form-group">
+					<label class="col-xs-3 control-label"  for="plateNumber"><spring:message code="addVehicle.form.plateNumber"/></label>
 						<div>
-							<form:input id="plateNumber" path="plateNumber" type="text"/>
+							<form:input class="col-xs-9 form-control"  onblur="checkIfPlateFound()"  id="plateNumber" path="plateNumber" type="text"/>
+                             	<label class="col-xs-2" id="platefound" style="color:red;display: none;">PlateNumber is found try another</label>						
 							<form:errors path="plateNumber"/>
 						</div>
-					</div>
+				
 				</div>
-				<div>
-					<label for="description"><spring:message code="addVechile.form.description"/></label>
+				<div class="form-group">
+					<label  class="col-xs-3 control-label"  for="description"><spring:message code="addVechile.form.description"/></label>
 					<div>
-						<form:textarea id="description" path="description" rows = "4"/>
+						<form:textarea class="col-xs-9 form-control"   id="description" path="description" rows="5" cols="30" />
 						<form:errors path="description"/>
+						</div>
 					</div>
-				</div>
-				<div>
-					<label for="pricePerDay"><spring:message code="addVechile.form.pricePerDay"/></label>
+				<div class="form-group">
+					<label class="col-xs-3 control-label"  for="pricePerDay"><spring:message code="addVechile.form.pricePerDay"/></label>
 					<div>
-						<form:input id="pricePerDay" path="pricePerDay" type="text"/>
+						<form:input  class="col-xs-9 form-control"  id="pricePerDay" path="pricePerDay" type="text"/>
 						<form:errors path="pricePerDay"/>
 					</div>
 				</div>
 
-				<div>
-					<label for="addDate"><spring:message code="addVehicle.form.addDate"/></label>
+				<div class="form-group">
+					<label class="col-xs-3 control-label"  for="addDate"><spring:message code="addVehicle.form.addDate"/></label>
 					<div>
-						<form:input id="addDate" path="addDate" type="text"/>
+						<form:input class="col-xs-9 form-control"  id="addDate" path="addDate" type="text"/>
 						<form:errors path="addDate"/>
 					</div>
 				</div>
-			<div>
-					<label for="status"><spring:message code="addVehicle.form.status"/></label>
+			<div class="form-group">
+					<label class="col-xs-3 control-label"  for="status"><spring:message code="addVehicle.form.status"/></label>
 					<div>
 						<form:select path="status">
 						<form:option value="available">available</form:option>
@@ -84,15 +87,42 @@
 					</div>
 				</div>
 				
-				<div>
-					<label for="vechileImage"><spring:message code="addVehicle.form.vehicleImage"/></label>
+				<<div class="form-group">
+					<label  class="col-xs-3 control-label"   for="vechileImage"><spring:message code="addVehicle.form.vehicleImage"/></label>
 					<div>
-						<form:input id="vechileImage" path="vechileImage"  type="file"/>
+						<form:input class="col-xs-9 form-control"  id="vechileImage" path="vechileImage"  type="file"/>
 					</div>
 				</div>
 				<div>
-				<input type="submit" value="Submit"/>
+				<input type="submit" value="Submit"  class="btn btn-default" />
 				</div>
 			</form:form>
+			</div>
+				 <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+	function checkIfPlateFound() {
+		$.ajax({
+			type:'GET',
+		   url: '/shareTrip/checkPlate/'+$("#plateNumber").val(),
+		   contentType: 'application/json',
+		    success: function( resopnse) {
+		    	if(resopnse.status==="hasplate")
+		    		{
+		    		$("#platefound").css("display", "inline-block");
+		    		}
+		    	else if(response.status==="noplate"){
+		    		$("#platefound").css("display", "none");
+		    	}
+				},
+			error:function(errorObject){
+				if(errorObject.responseJSON.errorType="TheVechileNumberFound"){
+    				$("#platefound").css("display", "none");
+ 
+    			}
+	}
+	});
+	};
+	</script>
 </body>
 </html>
