@@ -1,8 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-<script type="text/javascript" src="<spring:url value="js/bookTrip.js"/>"></script>
-<style type="text/css">@import url("<c:url value="css/rest.css"/>");</style>
+<script type="text/javascript" src="<spring:url value="../js/bookTrip.js"/>"></script>
+<style type="text/css">@import url("<c:url value="../css/rest.css"/>");</style>
 <section class="container">
 	<div class="row">
 		<c:forEach items="${trips}" var="mytrip" varStatus="status">
