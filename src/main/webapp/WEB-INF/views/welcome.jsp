@@ -8,6 +8,5 @@
 </head>
 <body>
 
-    <h1>Welcome Share Trip</h1>
 </body>
 </html>
