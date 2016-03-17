@@ -31,7 +31,7 @@ public class HomeController {
 	}
 	@RequestMapping(value={"redirectToUserDashBoard"})
 	public String redirectToUserDashBoard(){
-		return "redirect:/userDashBoard";
+		return "redirect:/userDashBoard/";
 	}
 	
 	@RequestMapping(value={"userDashBoard"})
