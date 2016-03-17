@@ -13,4 +13,7 @@ public interface VechileRepository extends  CrudRepository<Vechile, Long>, JpaSp
 
 @Query("SELECT p FROM VECHILE p WHERE p.member.id=:mm")
  public List<Vechile> getUserVehicles(@Param("mm") Integer mm);
+
+@Query("Update VECHILE p set p.status=:status  WHERE p.id=:id")
+public void updateStatus(@Param("id") Integer id,@Param("status")String status);
 }

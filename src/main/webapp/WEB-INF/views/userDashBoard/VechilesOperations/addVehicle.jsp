@@ -87,7 +87,7 @@
 				<div>
 					<label for="vechileImage"><spring:message code="addVehicle.form.vehicleImage"/></label>
 					<div>
-						<input id="vechileImage" name="vechileImage"" type="file"/>
+						<form:input id="vechileImage" path="vechileImage"  type="file"/>
 					</div>
 				</div>
 				<div>

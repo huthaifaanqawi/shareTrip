@@ -1,5 +1,6 @@
 package edu.mum.shareTrip.domain;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -10,6 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+
+import org.springframework.format.annotation.NumberFormat;
+import org.springframework.format.annotation.NumberFormat.Style;
 
 @Entity(name="RENTAL")
 public class Rental {
@@ -25,10 +29,30 @@ public class Rental {
 	@Column(name="TO_DATE")
 	private Date toDate;
 	
-	@OneToOne
-	@JoinColumn(name="CAR_ID",referencedColumnName="ID")
-	private Car car;
+	@Column(name="COST")
+	@NumberFormat(style=Style.CURRENCY)
+	private BigDecimal unitPrice;
 	
+	@OneToOne
+	@JoinColumn(name="VECHILE_ID",referencedColumnName="ID")
+	private Vechile veichle;
+	
+	public BigDecimal getUnitPrice() {
+		return unitPrice;
+	}
+
+	public void setUnitPrice(BigDecimal unitPrice) {
+		this.unitPrice = unitPrice;
+	}
+
+	public Vechile getVeichle() {
+		return veichle;
+	}
+
+	public void setVeichle(Vechile veichle) {
+		this.veichle = veichle;
+	}
+
 	@ManyToOne
 	@JoinColumn(name="MEMBER_ID",referencedColumnName="ID")
 	private Member member;
@@ -57,13 +81,7 @@ public class Rental {
 		this.toDate = toDate;
 	}
 
-	public Car getCar() {
-		return car;
-	}
 
-	public void setCar(Car car) {
-		this.car = car;
-	}
 
 	public Member getMember() {
 		return member;

@@ -28,5 +28,9 @@ public class VechileServiceImpl implements VechileService{
 	public List<Vechile> getUserVehicles(int member_Id) {
 	return	vechileRepository.getUserVehicles((Integer)(member_Id));
 	}
+	@Override
+	public void updateStatus(int vechileId,String status) {	
+	vechileRepository.updateStatus(vechileId, status);
+	}
 
 }

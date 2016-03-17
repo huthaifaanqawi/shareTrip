@@ -34,21 +34,35 @@
 				<p>
 					<strong><spring:message code="addVechile.form.pricePerDay"/></strong> ${vechile.pricePerDay}
 				</p>
+					
 				<p>
-				<form id="data">
+					<strong><spring:message code="addVehicle.form.addDate"/></strong> ${vechile.addDate}
+				</p>
+				<p>
+				<form:form commandName="rental" method="post" >
 					<div>
 					<strong><spring:message code="addVehicle.form.fromDate"/></strong>
 					<div>
-						<input id="fromDate" name="fromDate" type="text"/>
+						<form:input id="fromDate" name="fromDate" type="text" onblur="checkdate(${vechile.addDate})"/>
+						<label class="col-xs-2" id="pastDate" style="color:red;display: none;">Username is used</label>
 					</div>
 				</div>
 		<div>
 		<strong><spring:message code="addVehicle.form.toDate"/></strong>
 			<div>
-						<input id="toDate" name="toDate" type="text"/>
+						<form:input id="toDate" name="toDate" type="text"/>
+						<label class="col-xs-2" id="toDate" style="color:red;display: none;">Username is used</label>
+					
 						</div>
 				</div>
-			</form>
+				<strong><spring:message code="addVehicle.form.unitPrice"/></strong>
+			<div>
+						<form:input id="unitPrice" name="unitPrice" type="text"/>
+			</div>
+			<div>
+				<input type="submit" value="Submit"/>
+			</div>
+			</form:form>
 				<h4></h4>
 			
  					<a href="#" class="btn btn-warning btn-large" ng-click="addToCart('${vechile.id}')"> 

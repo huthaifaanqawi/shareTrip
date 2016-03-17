@@ -1,5 +1,7 @@
 package edu.mum.shareTrip.service;
 
-public interface RentalService {
+import edu.mum.shareTrip.domain.Rental;
 
+public interface RentalService {
+void saveRental(Rental rental);
 }
