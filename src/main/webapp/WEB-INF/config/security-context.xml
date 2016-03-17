@@ -18,7 +18,7 @@
 				login-processing-url="/postLogin"
 				username-parameter="username" 
 				password-parameter="password"
- 			    default-target-url="/userDashBoard"    
+ 			    default-target-url="/redirectToUserDashBoard"    
                always-use-default-target="true"   
                authentication-failure-url="/loginfailed"/>
          <security:logout logout-success-url="/logout"  logout-url= "/doLogout"/>

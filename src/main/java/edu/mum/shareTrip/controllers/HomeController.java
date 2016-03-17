@@ -29,8 +29,13 @@ public class HomeController {
 	public String logout(){
 		return "logout";
 	}
+	@RequestMapping(value={"redirectToUserDashBoard"})
+	public String redirectToUserDashBoard(){
+		return "redirect:/userDashBoard";
+	}
+	
 	@RequestMapping(value={"userDashBoard"})
-	public String userDashBoard(){
+	public String userDashboard(){
 		return "userDashBoard";
 	}
 }

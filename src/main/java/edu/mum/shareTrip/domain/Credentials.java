@@ -30,7 +30,6 @@ public class Credentials {
 	private String password;
 	
 	@Column(name = "VERIFY_PASSWORD", nullable = false)
-	@Transient
 	private String verifyPassword;
 	
 
