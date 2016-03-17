@@ -32,7 +32,7 @@ public class Member implements Serializable{
 	@Id
 	@Column(name="ID", nullable=false ,unique = true)
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int id;
+	private long id;
 	
 	@Column(name="FIRST_NAME")
 	@NotEmpty
@@ -93,11 +93,11 @@ public class Member implements Serializable{
 		this.credentials = credentials;
 	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -187,6 +187,15 @@ public class Member implements Serializable{
 
 	public void setVechile(List<Vechile> vechile) {
 		this.vechile = vechile;
+	}
+	
+	public boolean equals(Object obj){
+		if(obj!= null && obj instanceof Member){
+			if(((Member)obj).getId()==this.id){
+				return true;
+			}
+		}
+		return false;
 	}
 	
 }
