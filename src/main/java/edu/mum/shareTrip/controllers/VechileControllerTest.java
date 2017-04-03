@@ -25,6 +25,19 @@ import edu.mum.shareTrip.exceptions.UserNotHaveVechileExpction;
 import edu.mum.shareTrip.service.MemberService;
 import edu.mum.shareTrip.service.VechileService;
 
+
+
+
+/**
+
+** Testing the checkout
+
+**/
+
+
+
+
+
 @Controller
 @RequestMapping("userDashBoard")
 public class VechileController {
