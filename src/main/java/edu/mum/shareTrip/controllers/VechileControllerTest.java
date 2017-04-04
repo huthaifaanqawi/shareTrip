@@ -34,7 +34,7 @@ import edu.mum.shareTrip.service.VechileService;
 
 
 
-@Controller
+@Controlle
 @RequestMapping("userDashBoard")
 public class VechileController {
       @Autowired
