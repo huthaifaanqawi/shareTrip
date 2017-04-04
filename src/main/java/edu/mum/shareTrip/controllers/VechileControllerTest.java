@@ -28,11 +28,7 @@ import edu.mum.shareTrip.service.VechileService;
 
 
 
-/**
 
-** Testing the checkout
-
-**/
 
 
 
