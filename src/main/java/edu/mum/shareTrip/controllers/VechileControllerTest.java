@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import edu.mum.shareTrip.domain.JsonResponse;
+
 import edu.mum.shareTrip.domain.Member;
 import edu.mum.shareTrip.domain.Rental;
 import edu.mum.shareTrip.domain.Vechile;
